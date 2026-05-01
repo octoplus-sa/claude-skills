@@ -1,0 +1,3729 @@
+# ListBoxBox
+
+*Source: [https://jsl.jmp.com/All%20Categories/Display%20Boxes/ListBoxBox.html](https://jsl.jmp.com/All%20Categories/Display%20Boxes/ListBoxBox.html)*
+
+---
+
+# [ListBoxBox](#listboxbox)[](#listboxbox "Click to copy url")
+
+## [Associated Constructors](#associated-constructors)[](#associated-constructors "Click to copy url")
+
+### [List Box](#list-box)[](#list-box "Click to copy url")
+
+**Syntax:** y = List Box( {item, ...}, \<width( pixels )\>, \<maxSelected( 9999 )\>, \<nlines( 12 )\>, \<script\> )
+
+**Description:** Returns a display box to show a list box of selection items. If item itself is a two-item list containing the item name and a string specifying a modeling type or sorting order, such as "Ordinal" or "Ascending", the appropriate icon will show up next to that item in the list box.
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    lb = List Box(
+        {{"First Item", "continuous"}, {"Second Item", "ordinal"}, {"Third Item", "nominal"}},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+```
+
+## [Item Messages](#item-messages)[](#item-messages "Click to copy url")
+
+### [Append](#append)[](#append "Click to copy url")
+
+**Syntax:** obj \<\< Append( "string" \| {"string", ...} )
+
+**Description:** Appends the new string or list of strings to the last position.
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+slb << Append( "name" );
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+slb << Append( {"weight", "height", "name"} );
+```
+
+### [Clear selection](#clear-selection)[](#clear-selection "Click to copy url")
+
+**Syntax:** obj \<\< Clear selection
+
+**Description:** Clears the current selection; the items are still there, but are no longer selected.
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Selected( 1 );
+lb << Set Selected( 2 );
+Wait( 1 );
+lb << Clear Selection;
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Each box clears the other box",
+    window:la = List Box(
+        {"broccoli", "spinach", "kale", "beet", "turnip"},
+        <<setscript( window:lb << clearselection )
+    ),
+    window:lb = List Box(
+        {"pepper", "avocado", "pumpkin", "tomato", "zucchini"},
+        <<setscript( window:la << clearselection )
+    )
+);
+```
+
+### [Enable](#enable)[](#enable "Click to copy url")
+
+**Syntax:** obj \<\< Enable( 0\|1 )
+
+**Description:** Sets this control to be enabled (1) or disabled (0).
+
+``` jsl
+//This message applies to many display box objects
+New Window( "Example",
+    cb1 = Check Box( "Mother", cb2 << Enable( cb1 << Get() ) ),
+    cb2 = Check Box( "Grandmother", <<Enable( 0 ) )
+);
+```
+
+### [Enable Item](#enable-item)[](#enable-item "Click to copy url")
+
+**Syntax:** obj \<\< Enable Item( index,enable )
+
+**Description:** Allows the item at index to be enabled (1) or disabled (0).
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Enable Item( 2, 0 );
+```
+
+### [Get Base Font](#get-base-font)[](#get-base-font "Click to copy url")
+
+**Syntax:** font = obj \<\< Get Base Font
+
+**Description:** Returns the base font used for text drawn by the box. Base fonts are predefined names such as Title, Text, Annotation, and others, which are specified in the Preferences for fonts.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Get Base Font;
+```
+
+### [Get Case Sensitive](#get-case-sensitive)[](#get-case-sensitive "Click to copy url")
+
+**Syntax:** "bool" = obj \<\< Get Case Sensitive
+
+**Description:** Returns true if items added to the list can match except for the case
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+slb << Append( "first item" );
+slb << Get Case Sensitive();
+```
+
+### [Get Context Menu Script](#get-context-menu-script)[](#get-context-menu-script "Click to copy url")
+
+**Syntax:** list = obj \<\< Get Context Menu Script
+
+**Description:** Returns the context menu script attached to the calling object.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script(
+    {"Beep", Beep(), "Beep Twice", Beep() ; Wait( 1.0 ) ; Beep() ; ,
+    "Get Context Menu Script", Print( lb << Get Context Menu Script )}
+);
+```
+
+### [Get First Visible Item](#get-first-visible-item)[](#get-first-visible-item "Click to copy url")
+
+**Syntax:** index = obj \<\< Get First Visible Item
+
+**Description:** Returns the index of the first visible item.
+
+**JMP Version Added:** 16
+
+``` jsl
+dt = Open( "$sample_data\big class.jmp" );
+New Window( "test", lb = List Box( dt:name << get values ) );
+lb << Set First Visible Item( 25 );
+Print( lb << Get First Visible Item() );
+```
+
+### [Get Font](#get-font)[](#get-font "Click to copy url")
+
+**Syntax:** obj \<\< Get Font
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Get Font;
+```
+
+### [Get Font Name](#get-font-name)[](#get-font-name "Click to copy url")
+
+**Syntax:** obj \<\< Get Font Name
+
+**Description:** Returns the name of the font.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Name( "Times New Roman" );
+fontobj << Get Font Name;
+```
+
+### [Get Font Scale](#get-font-scale)[](#get-font-scale "Click to copy url")
+
+**Syntax:** obj \<\< Get Font Scale
+
+**Description:** Returns the current scale factor for font.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Get Font Scale;
+```
+
+### [Get Font Size](#get-font-size)[](#get-font-size "Click to copy url")
+
+**Syntax:** obj \<\< Get Font Size
+
+**Description:** Returns the size of the font.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Get Font Size;
+```
+
+### [Get Font Style](#get-font-style)[](#get-font-style "Click to copy url")
+
+**Syntax:** obj \<\< Get Font Style
+
+**Description:** Returns the font style name.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Name( "Arial" );
+fontobj << Set Font Style( "Italic" );
+fontobj << Get Font Style;
+```
+
+### [Get Function](#get-function)[](#get-function "Click to copy url")
+
+**Syntax:** obj \<\< Get Function
+
+**Description:** Returns the function or script set for the control, if any.
+
+``` jsl
+//This message applies to many display box objects
+New Window( "Example",
+    bb = Button Box( "press me",
+        <<setFunction(
+            Function( {this/* functions specified with SetFunction get 'this' display box */},
+                this << setButtonName( "thanks" )
+            )
+        )
+    )
+);
+bb << Get Function;
+```
+
+### [Get Item Padding](#get-item-padding)[](#get-item-padding "Click to copy url")
+
+**Syntax:** obj \<\< Item Padding( sides ); sides = obj \<\< Get Item Padding
+
+**Description:** Padding adds space between listbox item text
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Item Padding( Left( 10 ), Top( 5 ), Right( 20 ), Bottom( 10 ) );
+```
+
+### [Get Items](#get-items)[](#get-items "Click to copy url")
+
+**Syntax:** list = obj \<\< Get Items
+
+**Description:** Returns a list of all of the items.
+
+**JMP Version Added:** 15
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Get Items;
+```
+
+### [Get Max Selected](#get-max-selected)[](#get-max-selected "Click to copy url")
+
+**Syntax:** max = obj \<\< Get Max Selected
+
+**Description:** Returns the maximum number of items that can be selected in the list.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Get Max Selected();
+```
+
+### [Get Menu Item State](#get-menu-item-state)[](#get-menu-item-state "Click to copy url")
+
+**Syntax:** 0\|1\|-1 = obj \<\< Get Menu Item State( index )
+
+**Description:** Gets the context menu item state of index menu item. The state will be normal (0), checked (1), or disabled (-1)
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script( {"A", Print( "A" ), "B", Print( "B" ), "C", Print( "C" )} );
+lb << Set Menu Item State( 2, -1 );
+lb << Get Menu Item State( 2 );
+```
+
+### [Get N Lines](#get-n-lines)[](#get-n-lines "Click to copy url")
+
+**Syntax:** nlines = obj \<\< Get N Lines
+
+**Description:** Returns the number of visible lines in the list.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Get N Lines();
+```
+
+### [Get Selected](#get-selected)[](#get-selected "Click to copy url")
+
+**Syntax:** list = obj \<\< Get Selected(\<"Column Reference"\>)
+
+**Description:** Returns a list of the selected items.
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Items( {"age", "height"} );
+lb << Set Selected( 2 );
+Print( lb << Get Selected );
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Items( {"age", "height"} );
+lb << Set Selected( 2 );
+Print( lb << Get Selected( "Column Reference" ) );
+```
+
+### [Get Selected Indices](#get-selected-indices)[](#get-selected-indices "Click to copy url")
+
+**Syntax:** indices = obj \<\< Get Selected Indices
+
+**Description:** Returns a list of all of the selected indices.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Selected( 2 );
+Print( lb << Get Selected Indices );
+```
+
+### [Get Submenu](#get-submenu)[](#get-submenu "Click to copy url")
+
+**Syntax:** obj \<\< Get Submenu( index )
+
+**Description:** Returns the number of submenus under the given menu item
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script(
+    {"A", Print( "A" ), "B", Print( "B" ), "B1", Print( "B1" ), "B2", Print( "B2" ), "B3",
+    Print( "B3" ), "C", Print( "C" )}
+);
+lb << Set Submenu( 2, 3 );
+lb << Get Submenu( 2 );
+```
+
+### [Insert](#insert)[](#insert "Click to copy url")
+
+**Syntax:** obj \<\< Insert( "string",index )
+
+**Description:** Adds the specified item or list of items to the list box after the specified index.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+slb << Insert( "name", 2 );
+```
+
+### [Is Enabled](#is-enabled)[](#is-enabled "Click to copy url")
+
+**Syntax:** 0\|1 = obj \<\< Is Enabled
+
+**Description:** Returns the enabled state of the control
+
+``` jsl
+//This message applies to many display box objects
+New Window( "Example",
+    cb1 = Check Box( "Mother", cb2 << Enable( cb1 << Get() ) ),
+    cb2 = Check Box( "Grandmother", <<Enable( 0 ) )
+);
+cb2 << Is Enabled();
+```
+
+### [Item Enabled](#item-enabled)[](#item-enabled "Click to copy url")
+
+**Syntax:** 0\|1 = obj \<\< Item Enabled( index )
+
+**Description:** Returns if the item at index is enabled (1) or disabled (0).
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Enable Item( 2, 0 );
+Print( lb << Item Enabled( 2 ) );
+```
+
+### [Item Padding](#item-padding)[](#item-padding "Click to copy url")
+
+**Syntax:** obj \<\< Item Padding( sides ); sides = obj \<\< Get Item Padding
+
+**Description:** Padding adds space between listbox item text
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Item Padding( Left( 10 ), Top( 5 ), Right( 20 ), Bottom( 10 ) );
+```
+
+### [Locate Item](#locate-item)[](#locate-item "Click to copy url")
+
+**Syntax:** obj \<\< Locate Item
+
+**JMP Version Added:** 14
+
+### [Menus Enabled](#menus-enabled)[](#menus-enabled "Click to copy url")
+
+**Syntax:** obj \<\< Menus Enabled( state=0\|1 )
+
+**Description:** Enables or disables the ListBoxBox menu from appearing when you right-click.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Menus Enabled( 0 );
+```
+
+### [On Change](#on-change)[](#on-change "Click to copy url")
+
+**Syntax:** obj \<\< On Change( script )
+
+**Description:** Executes the script when the selection in the list changes.
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "Example", clb = Col List Box( all, On Change( Show( clb << Get Items ) ) ) );
+Wait( 1 );
+dt << Delete Column( "height" );
+```
+
+### [Remove All](#remove-all)[](#remove-all "Click to copy url")
+
+**Syntax:** obj \<\< Remove All
+
+**Description:** Removes all of the items.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Remove All;
+```
+
+### [Remove Item](#remove-item)[](#remove-item "Click to copy url")
+
+**Syntax:** obj \<\< Remove Item( index )
+
+**Description:** Removes the item specified at index.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Append( {"weight", "height", "name"} );
+Wait( 1 );
+lb << Remove Item( 2 );
+```
+
+### [Remove Selected](#remove-selected)[](#remove-selected "Click to copy url")
+
+**Syntax:** obj \<\< Remove Selected
+
+**Description:** Removes the selected items.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Selected( 2 );
+lb << Remove Selected();
+```
+
+### [Set Base Font](#set-base-font)[](#set-base-font "Click to copy url")
+
+**Syntax:** obj \<\< Set Base Font( "Text"\|"Heading"\|"Title"\|"Small"\|"Mono"\|"Formula Editor"\|"Annotation"\|"Axis"\|"Marker"\|"Axis Title"\|"Graph Label"\|"Legend"\|"Graph Title"\|"Caption"\|"Data Table"\|"Hover Label" )
+
+**Description:** Sets the base font for text drawn by the box.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+Wait( 2 );
+fontobj << Set Base Font( "Title" );
+```
+
+### [Set Case Sensitive](#set-case-sensitive)[](#set-case-sensitive "Click to copy url")
+
+**Syntax:** obj \<\< Set Case Sensitive( "bool" )
+
+**Description:** Determines if items added to the list box should be compared against existing items with or without respect to case
+
+``` jsl
+New Window( "Example",
+    lb1 = List Box( {"First Item", "Second Item", "Third Item"}, nlines( 6 ) ),
+    lb2 = List Box( {"First Item", "Second Item", "Third Item"}, nlines( 6 ) )
+);
+lb1 << Set Case Sensitive( 0 );
+lb1 << Append( "first item" );
+lb2 << Append( "first item" );
+```
+
+### [Set Context Menu Script](#set-context-menu-script)[](#set-context-menu-script "Click to copy url")
+
+**Syntax:** obj \<\< Set Context Menu Script( {"string",script,"string",script, ...} )
+
+**Description:** Adds a context menu with the specified options and scripts to the box.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script(
+    {"Beep", Beep(), "Beep Twice", Beep() ; Wait( 1.0 ) ; Beep() ; ,
+    "Get Context Menu Script", Print( lb << Get Context Menu Script )}
+);
+```
+
+### [Set First Visible Item](#set-first-visible-item)[](#set-first-visible-item "Click to copy url")
+
+**Syntax:** obj \<\< Set First Visible Item( index )
+
+**Description:** Scrolls the list box so the requested item is the first visible item.
+
+**JMP Version Added:** 16
+
+``` jsl
+dt = Open( "$sample_data\big class.jmp" );
+New Window( "test", lb = List Box( dt:name << get values ) );
+lb << Set First Visible Item( 25 );
+```
+
+### [Set Font](#set-font)[](#set-font "Click to copy url")
+
+**Syntax:** obj \<\< Set Font( fontName, \<size\>, \<"bold italic underline strikeout"\>, \<angle\> )
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font( "Arial Black" );
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font( "Arial Black", 12, "Italic Underline" );
+```
+
+### [Set Font Name](#set-font-name)[](#set-font-name "Click to copy url")
+
+**Syntax:** obj \<\< Set Font Name( fontname )
+
+**Description:** Sets the font for text strings.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Name( "Arial Black" );
+```
+
+### [Set Font Scale](#set-font-scale)[](#set-font-scale "Click to copy url")
+
+**Syntax:** obj \<\< Set Font Scale( f )
+
+**Description:** Sets a scale factor for the current font. The scale factor will be applied to the size that is determined from the base font and point size.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+Wait( 2 );
+fontobj << Set Font Scale( 2.0 );
+```
+
+### [Set Font Size](#set-font-size)[](#set-font-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Font Size( n )
+
+**Description:** Sets the font size in points for text strings.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Size( 14 );
+```
+
+### [Set Font Style](#set-font-style)[](#set-font-style "Click to copy url")
+
+**Syntax:** obj \<\< Set Font Style( style )
+
+**Description:** Sets the font style for text strings. To set more than one style at once, place them in the same string, separated by spaces (see Example 2 below).
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Style( "Italic" );
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+fontobj << Set Font Style( "Italic Bold Underline" );
+```
+
+### [Set Function](#set-function)[](#set-function "Click to copy url")
+
+**Syntax:** obj \<\< Set Function( Function( {thisBox}, \<script\> ) )
+
+**Description:** Sets the given function for the control. The function's script runs when one or more items are selected.
+
+**JMP Version Added:** 15
+
+``` jsl
+New Window( "Example",
+    lb = List Box(
+        {"First Item", "Second Item", "Third Item", "Fourth Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 5 )
+    ),
+    Text Box( "" )
+);
+lb << Set Function(
+    Function( {thisBox},
+        (thisBox << sib) << Set Text( Char( thisBox << get selected ) )
+    )
+);
+```
+
+### [Set Items](#set-items)[](#set-items "Click to copy url")
+
+**Syntax:** obj \<\< Set Items( list )
+
+**Description:** Sets the list of all of the items.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+Wait( 1 );
+lb << Set Items( {"age", "height"} );
+lb << Get Items;
+```
+
+### [Set Max Selected](#set-max-selected)[](#set-max-selected "Click to copy url")
+
+**Syntax:** obj \<\< Set Max Selected( max )
+
+**Description:** Set the maximum number of items that can be selected in the list.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Max Selected( 1 );
+```
+
+### [Set Menu Item State](#set-menu-item-state)[](#set-menu-item-state "Click to copy url")
+
+**Syntax:** obj \<\< Set Menu Item State( index, 0\|1\|-1 )
+
+**Description:** Sets the context menu item at index to be normal (0), checked (1), or disabled (-1)
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script( {"A", Print( "A" ), "B", Print( "B" ), "C", Print( "C" )} );
+lb << Set Menu Item State( 2, -1 );
+```
+
+### [Set N Lines](#set-n-lines)[](#set-n-lines "Click to copy url")
+
+**Syntax:** obj \<\< Set N Lines( nlines )
+
+**Description:** Set the number of visible lines in the list.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set N Lines( 4 );
+```
+
+### [Set Script](#set-script)[](#set-script "Click to copy url")
+
+**Syntax:** obj \<\< Set Script( script )
+
+**Description:** Sets the given script to run when the control is clicked.
+
+**JMP Version Added:** 16
+
+``` jsl
+//This message applies to many display box objects
+New Window( "Example", ex = Button Box( "Press Me" ) );
+ex << Set Script( Print( "Pressed." ) );
+```
+
+### [Set Selected](#set-selected)[](#set-selected "Click to copy url")
+
+**Syntax:** obj \<\< Set Selected( index\|{index1, index2, ...}\|"All",\<selected\>,\<Run Script(0\|1)\> )
+
+**Description:** Sets the item at index to be selected (1) or deselected (0). By default, this message runs the script for its ListBoxBox. Use RunScript(0) to suppress running the script. Using the RunScript option also requires specifying the selected argument, as the arguments are positional.
+
+**Example 1**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Selected( 2, 1 );
+Print( lb << Get Selected );
+```
+
+**Example 2**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Max Selected( -1 );
+lb << Set Selected( "All", 1 );
+Print( lb << Get Selected );
+```
+
+**Example 3**
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Max Selected( -1 );
+selList = {3, 1};
+lb << Set Selected( selList, 1 );
+Print( lb << Get Selected );
+```
+
+### [Set Size](#set-size)[](#set-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Size( width,height )
+
+**Description:** Sets the width and height of the ListBoxBox.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Size( 150, 400 );
+```
+
+### [Set Submenu](#set-submenu)[](#set-submenu "Click to copy url")
+
+**Syntax:** obj \<\< Set Submenu( index, submenu count )
+
+**Description:** Turns the "index" menu item into a submenu with "submenu count" menu items
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Context Menu Script(
+    {"A", Print( "A" ), "B", Print( "B" ), "B1", Print( "B1" ), "B2", Print( "B2" ), "B3",
+    Print( "B3" ), "C", Print( "C" )}
+);
+lb << Set Submenu( 2, 3 );
+```
+
+### [Set Tip](#set-tip)[](#set-tip "Click to copy url")
+
+**Syntax:** obj \<\< Set Tip( tip )
+
+**Description:** Sets the text to be displayed as a tooltip when the mouse hovers over the control.
+
+``` jsl
+//This message applies to many display box objects
+New Window( "Example", ex = Button Box( "Hover Me", Print( "Pressed." ) ) );
+ex << Set Tip( "Print message to log" );
+```
+
+### [Set Tips](#set-tips)[](#set-tips "Click to copy url")
+
+**Syntax:** obj \<\< Set Tips( List of tips )
+
+**Description:** Sets tips for individual items in the listbox.
+
+``` jsl
+New Window( "Example",
+    slb = lb = fontobj = List Box(
+        {"First Item", "Second Item", "Third Item"},
+        width( 200 ),
+        max selected( 2 ),
+        nlines( 6 )
+    )
+);
+lb << Set Tips( {"Tip 1", "Tip 2", "Tip 3"} );
+```
+
+### [Show Item](#show-item)[](#show-item "Click to copy url")
+
+**Syntax:** obj \<\< Show Item( index )
+
+**Description:** Scrolls the listbox to make sure the requested item is visible in the list box.
+
+**JMP Version Added:** 16
+
+``` jsl
+dt = Open( "$sample_data\big class.jmp" );
+New Window( "test", lb = List Box( dt:name << get values ) );
+lb << show item( 25 );
+```
+
+## [Shared Item Messages](#shared-item-messages)[](#shared-item-messages "Click to copy url")
+
+### [Add Line Annotation](#add-line-annotation)[](#add-line-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Add Line Annotation
+
+**Description:** Adds a line on top of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Add Line Annotation( Line( 160, 235, 240, 235 ) );
+```
+
+### [Add Pin Annotation](#add-pin-annotation)[](#add-pin-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Add Pin Annotation
+
+**Description:** Adds a pinned annotation on top of a display box. Most attributes (such as Index Row, UniqueID and FoundPt) are designed for internal use only.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+dt << Bivariate(
+    Y( :weight ),
+    X( :height ),
+    SendToReport(
+        Dispatch( {}, "Bivar Plot", FrameBox,
+            Add Pin Annotation(
+                Seg( Marker Seg( 1 ) ),
+                Index( 17 ),
+                Index Row( 17 ),
+                UniqueID( -960001792 ),
+                FoundPt( {238, 219} ),
+                Origin( {64.9765625, 142} ),
+                Offset( {-174, -40} ),
+                Tag Line( 1 ),
+                Font( "Helvetica", 11, "Plain" )
+            )
+        )
+    )
+);
+```
+
+### [Add Polygon Annotation](#add-polygon-annotation)[](#add-polygon-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Add Polygon Annotation
+
+**Description:** Adds a polygon on top of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Add Polygon Annotation(
+    Points( {210, 80}, {230, 70}, {280, 115}, {240, 120} ),
+    Color( "Red" ),
+    Closed( 1 )
+);
+```
+
+### [Add Simple Shape Annotation](#add-simple-shape-annotation)[](#add-simple-shape-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Add Simple Shape Annotation
+
+**Description:** Adds a simple shape on top of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Add Simple Shape Annotation( Oval( 210, 100, 250, 75 ) );
+rbiv << Add Simple Shape Annotation( Rectangle( 70, 180, 95, 215 ) );
+```
+
+### [Add Text Annotation](#add-text-annotation)[](#add-text-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Add Text Annotation
+
+**Description:** Adds text on top of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Add Text Annotation(
+    Text( "We need to discuss this at the next meeting." ),
+    Text Box( {65, 35, 200, 77} )
+);
+```
+
+### [Background Color](#background-color)[](#background-color "Click to copy url")
+
+**Syntax:** obj \<\< Background Color( color ); color = obj \<\< Get Background Color
+
+**Description:** If the background color is set, the box is filled with the background color prior to drawing its content. If the background color is not set, the background and content of the containing boxes show through.
+
+**JMP Version Added:** 15
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Background Color );
+Wait( 2 );
+tb << Background Color( "Yellow" );
+```
+
+### [Border](#border)[](#border "Click to copy url")
+
+**Syntax:** obj \<\< Border( sides ); sides = obj \<\< Get Border
+
+**Description:** Borders are solid lines drawn around the outside of a display box. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical borders.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Border );
+Wait( 1 );
+tb << Border( 1 );
+```
+
+### [Border Color](#border-color)[](#border-color "Click to copy url")
+
+**Syntax:** obj \<\< Border Color( color ); color = obj \<\< Get Border Color
+
+**Description:** Optional color to override the default color for box borders.
+
+**JMP Version Added:** 19
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Wait( 2 );
+tb << Border( 1 );
+tb << Border Color( "Light Red" );
+```
+
+### [Bring Window To Front](#bring-window-to-front)[](#bring-window-to-front "Click to copy url")
+
+**Syntax:** obj \<\< Bring Window To Front
+
+**Description:** Brings the window to the front.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << Run Script( "Bivariate" );
+w << Bring Window To Front;
+```
+
+### [Child](#child)[](#child "Click to copy url")
+
+**Syntax:** obj \<\< Child
+
+**Description:** Returns the child of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 1 )];
+axisParent = axisbox << parent();
+axisChild = axisParent << child();
+Print( axisChild << Class Name() );
+```
+
+### [Class Name](#class-name)[](#class-name "Click to copy url")
+
+**Syntax:** obj \<\< Class Name
+
+**Description:** Returns the name of the display class for the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 1 )];
+axisbox << Class Name();
+```
+
+### [Clone Box](#clone-box)[](#clone-box "Click to copy url")
+
+**Syntax:** obj \<\< Clone Box
+
+**Description:** Makes a new copy of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << append( Text Box( "=== below ===" ) );
+clonedBox = rbiv << Clone Box();
+rbiv << append( clonedBox );
+```
+
+### [Close Window](#close-window)[](#close-window "Click to copy url")
+
+**Syntax:** obj \<\< Close Window( \<"NoSave"\> )
+
+**Description:** Closes the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 2 );
+w << Close Window;
+```
+
+### [Copy Data](#copy-data)[](#copy-data "Click to copy url")
+
+**Syntax:** obj \<\< Copy Data
+
+**Description:** copies the tab-delimited data from a matrix or table to the clip board.
+
+``` jsl
+New Window( "x", mat = Matrix Box( [1 2 3, 4 5 6, 7 8 9] ) );
+mat << CopyData;
+```
+
+### [Copy Graph](#copy-graph)[](#copy-graph "Click to copy url")
+
+**Syntax:** obj \<\< Copy Graph
+
+**Description:** Puts a picture of the graph and axes on the clipboard.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+(rbiv[FrameBox( 1 )]) << Copy Graph();
+"paste into a paint program";
+```
+
+### [Copy Picture](#copy-picture)[](#copy-picture "Click to copy url")
+
+**Syntax:** obj \<\< Copy Picture
+
+**Description:** Puts a picture of the display box on the clipboard.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Copy Picture();
+```
+
+### [Delete Box](#delete-box)[](#delete-box "Click to copy url")
+
+**Syntax:** obj \<\< Delete Box
+
+**Description:** Delete the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 1 )];
+axisbox << Delete Box();
+```
+
+### [Deselect](#deselect)[](#deselect "Click to copy url")
+
+**Syntax:** obj \<\< Deselect
+
+**Description:** Deselects this object for use by Edit menu commands.
+
+``` jsl
+//This message applies to all display box objects
+selected = 0;
+New Window( "Example",
+    ex = Button Box( "Press Me",
+        selected = !selected;
+        refresh;
+    )
+);
+refresh = Function( {},
+    If( selected,
+        ex << Select,
+        ex << Deselect
+    )
+);
+```
+
+### [Dispatch](#dispatch)[](#dispatch "Click to copy url")
+
+**Syntax:** obj \<\< Dispatch( {outline node, ...}, display element, display element type, command )
+
+**Description:** Send command to a specific part of a display tree.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Dispatch( {}, "Bivar Plot", FrameBox, {Marker Size( 3 )} );
+```
+
+### [Enabled](#enabled)[](#enabled "Click to copy url")
+
+**Syntax:** obj \<\< Enabled( state=0\|1 ); state = obj \<\< Get Enabled
+
+**Description:** An object that is not enabled will not respond to keyboard or mouse input. This property is inherited by child objects, so a container object that is disabled will cause all descendent objects to be disabled.
+
+``` jsl
+//This message applies to all display objects
+New Window( "enabled",
+    V List Box(
+        check = Check Box(
+            {"Use Password"},
+            ptext << Enabled( check << Get( 1 ) );
+            pvalue << Enabled( check << Get( 1 ) );
+        ),
+        Lineup Box( N Col( 2 ),
+            Text Box( "Username:" ),
+            Text Edit Box( "", <<Set Width( 100 ) ),
+            ptext = Text Box( "Password:", <<Enabled( 0 ) ),
+            pvalue = Text Edit Box( "",
+                <<Password Style( 1 ),
+                <<Set Width( 20 ),
+                <<Enabled( 0 )
+            )
+        )
+    )
+);
+```
+
+### [Find](#find)[](#find "Click to copy url")
+
+**Syntax:** obj \<\< Find
+
+**Description:** Returns a display box with the given argument.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv << Find( axis box( 1 ) );
+axisbox << Delete();
+```
+
+### [Get Annotation](#get-annotation)[](#get-annotation "Click to copy url")
+
+**Syntax:** obj \<\< Get Annotation
+
+**Description:** Returns the first annotation that is anchored to this display box. Other annotations can be accessed by using Sib() on the result.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Add Text Annotation(
+    Text( "We need to discuss this at the next meeting." ),
+    Text Box( {65, 35, 200, 77} )
+);
+annotation = rbiv << Get Annotation;
+annotation << delete;
+```
+
+### [Get Background Color](#get-background-color)[](#get-background-color "Click to copy url")
+
+**Syntax:** obj \<\< Background Color( color ); color = obj \<\< Get Background Color
+
+**Description:** If the background color is set, the box is filled with the background color prior to drawing its content. If the background color is not set, the background and content of the containing boxes show through.
+
+**JMP Version Added:** 15
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Background Color );
+Wait( 2 );
+tb << Background Color( "Yellow" );
+```
+
+### [Get Border](#get-border)[](#get-border "Click to copy url")
+
+**Syntax:** obj \<\< Border( sides ); sides = obj \<\< Get Border
+
+**Description:** Borders are solid lines drawn around the outside of a display box. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical borders.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Border );
+Wait( 1 );
+tb << Border( 1 );
+```
+
+### [Get Border Color](#get-border-color)[](#get-border-color "Click to copy url")
+
+**Syntax:** obj \<\< Border Color( color ); color = obj \<\< Get Border Color
+
+**Description:** Optional color to override the default color for box borders.
+
+**JMP Version Added:** 19
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Wait( 2 );
+tb << Border( 1 );
+tb << Border Color( "Light Red" );
+```
+
+### [Get Content Size](#get-content-size)[](#get-content-size "Click to copy url")
+
+**Syntax:** obj \<\< Get Content Size
+
+**Description:** Returns the content size within the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+c = w << Get Content Size();
+Show( c );
+```
+
+### [Get Display Path](#get-display-path)[](#get-display-path "Click to copy url")
+
+**Syntax:** obj \<\< Get Display Path( parent box, \<receiver expr\>, \<Mode("XPath"\|"Subscript")\> )
+
+**Description:** Gets a relatively robust expression to navigate between parent box and obj. This path is not guaranteed to be stable across JMP releases. The receiver expr is incorporated into the output expression if provided. If not, the expression provided for parent box is used instead. As shown in the example, this message is mainly useful for increasing the robustness of a path you already have available. The XPath mode is default.
+
+#### [Basic](#basic)[](#basic "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+rpt = Report( biv );
+xpath expr = rpt[Number Col Box( 9 )] << Get Display Path( rpt, Expr( Report( biv ) ) ); // Make Number Col Box(9) more robust
+Show( xpath expr );
+xpath expr << Select;
+```
+
+#### [Subscript Mode](#subscript-mode)[](#subscript-mode "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+rpt = Report( biv );
+subscript expr = rpt[Number Col Box( 9 )] << Get Display Path( rpt, Mode( "Subscript" ) ); // Make Number Col Box(9) more robust
+Show( subscript expr );
+subscript expr << Select;
+```
+
+### [Get Enabled](#get-enabled)[](#get-enabled "Click to copy url")
+
+**Syntax:** obj \<\< Enabled( state=0\|1 ); state = obj \<\< Get Enabled
+
+**Description:** An object that is not enabled will not respond to keyboard or mouse input. This property is inherited by child objects, so a container object that is disabled will cause all descendent objects to be disabled.
+
+``` jsl
+//This message applies to all display objects
+New Window( "enabled",
+    V List Box(
+        check = Check Box(
+            {"Use Password"},
+            ptext << Enabled( check << Get( 1 ) );
+            pvalue << Enabled( check << Get( 1 ) );
+        ),
+        Lineup Box( N Col( 2 ),
+            Text Box( "Username:" ),
+            Text Edit Box( "", <<Set Width( 100 ) ),
+            ptext = Text Box( "Password:", <<Enabled( 0 ) ),
+            pvalue = Text Edit Box( "",
+                <<Password Style( 1 ),
+                <<Set Width( 20 ),
+                <<Enabled( 0 )
+            )
+        )
+    )
+);
+```
+
+### [Get HTML](#get-html)[](#get-html "Click to copy url")
+
+**Syntax:** obj \<\< Get HTML( \<format\> )
+
+**Description:** Returns a string containing HTML source for the display box.
+
+**Example 1**
+
+``` jsl
+//This message applies to all display box objects
+win = New Window( "Example", a = Text Box( "Example Text" ) );
+a << Set Text( win << Get HTML );
+```
+
+**Example 2**
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+obj = dt << Oneway( Y( :height ), X( :sex ), Means( 1 ), Mean Diamonds( 1 ) );
+Save Text File( "$TEMP/Oneway.html", obj << Get HTML( "svg" ) ); // Prefer <<Save HTML
+Web( "$TEMP/Oneway.html", JMPWindow );
+```
+
+### [Get Height](#get-height)[](#get-height "Click to copy url")
+
+**Syntax:** width = obj \<\< Get Height
+
+**Description:** Returns the height of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Get Height;
+```
+
+### [Get Horizontal Alignment](#get-horizontal-alignment)[](#get-horizontal-alignment "Click to copy url")
+
+**Syntax:** obj \<\< Horizontal Alignment( "Default"\|"Left"\|"Center"\|"Right" ); "Default"\|"Left"\|"Center"\|"Right" = obj \<\< Get Horizontal Alignment
+
+**Description:** Horizontal alignment controls the positioning of the box within a container if the box does not fill the entire space.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+lb = r[List Box( 6 )];
+lb << Border( 1 );
+Wait( 2 );
+lb << Horizontal Alignment( "Right" );
+```
+
+### [Get Journal](#get-journal)[](#get-journal "Click to copy url")
+
+**Syntax:** obj \<\< Get Journal
+
+**Description:** Returns a string containing journal source for the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+Print( rbiv << Get Journal );
+```
+
+### [Get Margin](#get-margin)[](#get-margin "Click to copy url")
+
+**Syntax:** obj \<\< Margin( sides ); sides = obj \<\< Get Margin
+
+**Description:** Margin adds space between the border of the box and adjacent boxes. Use named arguments, or provide a list of values. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical margins.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Margin );
+tb << Border( 1 );
+Wait( 2 );
+tb << Margin( Left( 20 ), Top( 20 ), Right( 20 ), Bottom( 20 ) );
+```
+
+### [Get Max Size](#get-max-size)[](#get-max-size "Click to copy url")
+
+**Syntax:** width,height = obj \<\< Get Max Size
+
+**Description:** Returns the maximum size of this display box for purposes of auto-stretching.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Get Max Size;
+```
+
+### [Get Min Size](#get-min-size)[](#get-min-size "Click to copy url")
+
+**Syntax:** width,height = obj \<\< Get Min Size
+
+**Description:** Returns the minimum size of this display box for purposes of auto-stretching.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Get Min Size;
+```
+
+### [Get Namespace](#get-namespace)[](#get-namespace "Click to copy url")
+
+**Syntax:** obj \<\< Get Namespace
+
+**Description:** Returns the namespace associated with this display object.
+
+``` jsl
+//This message applies to all display objects
+x = 1;
+w = New Window( "Test", b = Button Box( "Press me" ) );
+b:x = 2;
+ns = b << GetNamespace();
+Show( ns:x, x );
+```
+
+### [Get On Close](#get-on-close)[](#get-on-close "Click to copy url")
+
+**Syntax:** obj \<\< Get On Close
+
+**Description:** Returns the script or function that will run when the window closes.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << On Close(
+    // Modal dialogs return Button(1) if OK is pressed, Button(-1) if canceled
+    New Window( "Are you sure?",
+        <<modal,
+        V List Box(
+            Text Box( "Press OK to allow the window to close" ),
+            H List Box( Button Box( "OK" ), Button Box( "Cancel" ) )
+        )
+    )["button"] == 1
+);
+Show( w << Get On Close );
+```
+
+### [Get Padding](#get-padding)[](#get-padding "Click to copy url")
+
+**Syntax:** obj \<\< Padding( sides ); sides = obj \<\< Get Padding
+
+**Description:** Padding adds space between the content and the border of the box. Use named arguments, or provide a list of values. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical padding.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Padding );
+tb << Border( 1 );
+Wait( 1 );
+tb << Padding( Left( 20 ), Top( 20 ), Right( 20 ), Bottom( 20 ) );
+```
+
+### [Get Page Setup](#get-page-setup)[](#get-page-setup "Click to copy url")
+
+**Syntax:** obj \<\< Get Page Setup
+
+**Description:** Get page setup information for PDF
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Window", Text Box( "Page Setup Test" ) );
+w << get page setup();
+```
+
+### [Get Picture](#get-picture)[](#get-picture "Click to copy url")
+
+**Syntax:** obj \<\< Get Picture( \<Scale(factor)\>, \<Type("Bitmap" \| "Scalable")\>, \<View("Picture" \| "Screen" \| "Print"), \<Appearance("Default" \| "Current")\>, \<SubRect(Left(number), Top(number), Right(number), Bottom(number))\> )
+
+**Description:** Captures db as an Image Object. The optional Scale argument will render the image at a scaled resolution. Scaling requires that the display box be stretchable. The Type argument determines whether the result will be a scalable vector image or a bitmap. By default a scalable image is returned, which is suitable for saving to vector formats like PDF. The View option changes the behavior of some boxes. The default option of "Picture" draws the report as it would when exporting to an image format, with scrolled areas fully shown. View mode of "Screen" draws the report as seen on-screen, and "Print" draws the report as it does when printing, without any of the page setup features. The SubRect option will capture a portion of the resulting image rather than a full image. The Appearance option can change from the "Default" output colors to the "Current" colors as seen on-screen. The View, SubRect, and Appearance options are only supported for Type "Bitmap".
+
+#### [Default](#default)[](#default "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+New Window( "Example", rbiv << Get Picture );
+```
+
+#### [Scale](#scale)[](#scale "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv[FrameBox( 1 )] << Set Stretch( "Window", "Window" );
+New Window( "Example", rbiv << Get Picture( Scale( 1.5 ) ) );
+```
+
+#### [View and Appearance](#view-and-appearance)[](#view-and-appearance "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate(
+    Y( :weight ),
+    X( :height ),
+    Fit Line( {Line Color( {212, 73, 88} )} ),
+    Fit Polynomial( 3, {Line Color( {61, 174, 70} )} ),
+    Kernel Smoother( 1, 1, 0.5, 0 )
+);
+rbiv = biv << report;
+rbiv[FrameBox( 1 )] << Set Stretch( "Window", "Window" );
+New Window( "Example",
+    H List Box(
+        rbiv << Get Picture( View( "Screen" ), Appearance( "Current" ) ),
+        rbiv << Get Picture( View( "Print" ), Appearance( "Default" ) )
+    )
+);
+```
+
+### [Get Project](#get-project)[](#get-project "Click to copy url")
+
+**Syntax:** project = obj \<\< Get Project()
+
+**Description:** Returns the parent project of the window, or Empty() if it is not in a project.
+
+**JMP Version Added:** 14
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+c = w << Get Project();
+Show( c );
+```
+
+### [Get Properties](#get-properties)[](#get-properties "Click to copy url")
+
+**Syntax:** obj \<\< Get Properties
+
+**Description:** Returns an associative array that contains the display box's properties and their values.
+
+``` jsl
+New Window( "Example", bb = Button Box( "Press Me", Print( "Pressed" ) ) );
+bb << Get Properties;
+```
+
+### [Get Property](#get-property)[](#get-property "Click to copy url")
+
+**Syntax:** obj \<\< Get Property( "property" )
+
+**Description:** Returns the current setting for the named property.
+
+``` jsl
+New Window( "Example", bb = Button Box( "Press Me", Print( "Pressed" ) ) );
+bb << Get Property( "Enabled" );
+```
+
+### [Get Property List](#get-property-list)[](#get-property-list "Click to copy url")
+
+**Syntax:** obj \<\< Get Property List
+
+**Description:** Returns a list of properties the display box has.
+
+``` jsl
+New Window( "Example", bb = Button Box( "Press Me", Print( "Pressed" ) ) );
+bb << Get Property List;
+```
+
+### [Get RTF](#get-rtf)[](#get-rtf "Click to copy url")
+
+**Syntax:** obj \<\< Get RTF( \<format\> )
+
+**Description:** Returns a string containing RTF source for the display box.
+
+**Example 1**
+
+``` jsl
+//This message applies to all display box objects
+win = New Window( "Example", a = Text Box( "Example Text" ) );
+a << Set Text( win << Get RTF );
+```
+
+**Example 2**
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+obj = dt << Oneway( Y( :height ), X( :sex ), Means( 1 ), Mean Diamonds( 1 ) );
+Save Text File( "$TEMP/Oneway.rtf", obj << Get RTF( "png" ) ); // Prefer <<Save RTF
+Open( "$TEMP/Oneway.rtf" );
+```
+
+### [Get Row States](#get-row-states)[](#get-row-states "Click to copy url")
+
+**Syntax:** rs = obj \<\< Get Row States( \<dt\> )
+
+**Description:** Returns a vector containing the row state for every row in the given data table or the current data table. The row states can come from the table, or from the filter context of the box.
+
+#### [Single table](#single-table)[](#single-table "Click to copy url")
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "filter test",
+    Data Filter Context Box(
+        H List Box(
+            dt << Data Filter(
+                Local,
+                Add Filter( columns( :height ), Where( :height >= 51 & :height <= 62 ) ),
+                Mode( Select( 0 ), Show( 1 ), Include( 1 ) )
+            ),
+            V List Box(
+                t = Text Box( "0 Rows Excluded" ),
+                Distribution(
+                    Continuous Distribution( Column( :weight ) ),
+                    Nominal Distribution( Column( :age ) )
+                )
+            )
+        )
+    )
+);
+updatetext = Function( {},
+    rs = t << Get Row States( dt );
+    n = 0;
+    For( ii = 1, ii <= N Rows( rs ), ii++,
+        If( Excluded( As Row State( rs[ii] ) ),
+            n
+            ++)
+    );
+    t << Set Text( Char( n ) || " Rows Excluded" );
+);
+rsupdate = Function( {a},
+    If( Is Matrix( a ),
+        updatetext()
+    )
+);
+rsh = t << Make Row State Handler( dt, rsupdate );
+updatetext();
+```
+
+#### [Where subset](#where-subset)[](#where-subset "Click to copy url")
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "filter test",
+    t = Text Box( "0 Rows Excluded" ),
+    dist = Distribution(
+        Continuous Distribution( Column( :weight ) ),
+        Nominal Distribution( Column( :age ) ),
+        Local Data Filter(
+            Add Filter( columns( :height ), Where( :height >= 51 & :height <= 62 ) ),
+            Mode( Select( 0 ), Show( 1 ), Include( 1 ) )
+        ),
+        Where( :sex == "F" )
+    )
+);
+subset = dist << Get Data Table();
+updatetext = Function( {},
+    rs = Report( dist ) << Get Row States( subset );
+    n = 0;
+    For( ii = 1, ii <= N Rows( rs ), ii++,
+        If( Excluded( As Row State( rs[ii] ) ),
+            n
+            ++)
+    );
+    t << Set Text( Char( n ) || " Rows Excluded" );
+);
+rsupdate = Function( {a},
+    If( Is Matrix( a ),
+        updatetext()
+    )
+);
+rsh = Report( dist ) << Make Row State Handler( subset, rsupdate );
+updatetext();
+```
+
+### [Get Show Window](#get-show-window)[](#get-show-window "Click to copy url")
+
+**Syntax:** obj \<\< Get Show Window
+
+**Description:** Returns the visibility of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 1 );
+w << Show Window( 0 );
+Wait( 2 );
+Print( w << Get Show Window() );
+```
+
+### [Get Size](#get-size)[](#get-size "Click to copy url")
+
+**Syntax:** width,height = obj \<\< Get Size
+
+**Description:** Returns the size of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+Print( fb << Get Size );
+```
+
+### [Get Stretch](#get-stretch)[](#get-stretch "Click to copy url")
+
+**Syntax:** x,y = obj \<\< Get Stretch
+
+**Description:** Returns the stretching flags for this display box in the horizontal and vertical directions.
+
+**JMP Version Added:** 16
+
+``` jsl
+//This message applies to all display box objects
+New Window( "Stretch",
+    V List Box(
+        H List Box( Text Edit Box( "String1" ), Text Edit Box( "String2" ) ),
+        spacer = Spacer Box(
+            Size( 20, 20 ),
+            Color( "Light Red" ),
+            <<Set Stretch( "Fill", "Off" )
+        )
+    )
+);
+spacer << Get Stretch();
+```
+
+### [Get Text](#get-text)[](#get-text "Click to copy url")
+
+**Syntax:** obj \<\< Get Text
+
+**Description:** Returns a string containing the text of the display box.
+
+``` jsl
+//This message applies to all display box objects
+win = New Window( "Example", a = Text Box( "Example Text" ) );
+a << Set Text( win << Get Text );
+```
+
+### [Get Text Color](#get-text-color)[](#get-text-color "Click to copy url")
+
+**Syntax:** obj \<\< Text Color( color ); color = obj \<\< Get Text Color
+
+**Description:** Text will be drawn using the text color if it has been set. If the property has not been set, the box will inherit the text color of the containing box.
+
+**JMP Version Added:** 15
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Text Color );
+Wait( 2 );
+tb << Text Color( "Red" );
+```
+
+### [Get UI Only](#get-ui-only)[](#get-ui-only "Click to copy url")
+
+**Syntax:** obj \<\< UI Only( state=0\|1 ); state = obj \<\< Get UI Only
+
+### [Get User Resizable](#get-user-resizable)[](#get-user-resizable "Click to copy url")
+
+**Syntax:** obj \<\< User Resizable; obj \<\< Get User Resizable
+
+**Description:** If the box is user resizable, the cursor will change near the bottom and right edges to allow drag-and-drop resizing.
+
+``` jsl
+root1 = Tree Node( "Parent 1" );
+root2 = Tree Node( "Parent 2" );
+c1 = Tree Node( "Child 1" );
+c2 = Tree Node( "Child 2" );
+c3 = Tree Node( "Child 3" );
+c4 = Tree Node( "Child 4" );
+root1 << Append( c1 );
+root1 << Append( c2 );
+root2 << Append( c3 );
+root2 << Append( c4 );
+New Window( "resize",
+    H Splitter Box(
+        Size( 600, 200 ),
+        tree = Tree Box( {root1, root2} ),
+        scroll = Scroll Box(
+            Size( 300, 200 ),
+            Picture Box( Open( "$SAMPLE_IMAGES/tile.jpg", jpg ) )
+        )
+    )
+);
+tree << Set Stretch( "Window", "Window" ) << Set Max Size( 10000, 10000 );
+scroll << Set Stretch( "Window", "Window" ) << Set Max Size( 10000, 10000 );
+Wait( 2 );
+tree << User Resizable( {0, 0} );
+scroll << User Resizable( {0, 0} );
+```
+
+### [Get Vertical Alignment](#get-vertical-alignment)[](#get-vertical-alignment "Click to copy url")
+
+**Syntax:** obj \<\< Vertical Alignment( "Default"\|"Top"\|"Center"\|"Bottom" ); "Default"\|"Top"\|"Center"\|"Bottom" = obj \<\< Get Vertical Alignment
+
+**Description:** Vertical alignment controls the positioning of the box within a container if the box does not fill the entire space.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+lb = r[List Box( 6 )];
+lb << Set Horizontal( 1 );
+lb = r[List Box( 7 )];
+lb << Border( 1 );
+Wait( 2 );
+lb << Vertical Alignment( "Bottom" );
+```
+
+### [Get Visibility](#get-visibility)[](#get-visibility "Click to copy url")
+
+**Syntax:** obj \<\< Visibility( "Visible"\|"Hidden"\|"Collapse" ); "Visible"\|"Hidden"\|"Collapse" = obj \<\< Get Visibility
+
+**Description:** Visibility determines whether a box is shown and whether it takes up space. The default value of "Visible" means that the object will be shown. A "Hidden" box is not shown but still takes up space, while a "Collapsed" box takes up no space in the layout.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Visibility );
+Wait( 1 );
+tb << Visibility( "Collapse" );
+Show( tb << Get Visibility );
+```
+
+### [Get Web Support](#get-web-support)[](#get-web-support "Click to copy url")
+
+**Syntax:** obj \<\< Get Web Support
+
+**Description:** Return a number indicating the level of Interactive HTML support for the display object. 1 means some or all elements are supported. 0 means no support.
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+obj = Bivariate( Y( :Weight ), X( :Height ) );
+s = obj << Get Web Support();
+Show( s );
+```
+
+### [Get Width](#get-width)[](#get-width "Click to copy url")
+
+**Syntax:** width = obj \<\< Get Width
+
+**Description:** Returns the width of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Get Width;
+```
+
+### [Get Window Icon](#get-window-icon)[](#get-window-icon "Click to copy url")
+
+**Syntax:** obj \<\< Get Window Icon
+
+**Description:** Returns the window icon.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+t = w << Get Window Icon;
+Show( t );
+```
+
+### [Get Window Position](#get-window-position)[](#get-window-position "Click to copy url")
+
+**Syntax:** obj \<\< Get Window Position
+
+**Description:** Returns the position of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+p = w << Get Window Position();
+Show( p );
+```
+
+### [Get Window Size](#get-window-size)[](#get-window-size "Click to copy url")
+
+**Syntax:** obj \<\< Get Window Size
+
+**Description:** Returns the size of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+s = w << Get Window Size();
+Show( s );
+```
+
+### [Get Window Title](#get-window-title)[](#get-window-title "Click to copy url")
+
+**Syntax:** obj \<\< Get Window Title
+
+**Description:** Returns the window title.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+t = w << Get Window Title;
+Show( t );
+```
+
+### [Get Window View](#get-window-view)[](#get-window-view "Click to copy url")
+
+**Syntax:** obj \<\< Get Window View
+
+**Description:** Returns the current window view. Windows can be "Visible", "Invisible", or "Private".
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Print( w << Get Window View() );
+```
+
+### [Get XML](#get-xml)[](#get-xml "Click to copy url")
+
+**Syntax:** obj \<\< Get XML( \<English(0\|1)\>, \<NoData(0\|1)\> )
+
+**Description:** Retrieves the display tree formatted as XML. By default, strings are returned in the local language, and the XML includes data values within some boxes. Use the English option to return English strings where available. Use the NoData option to omit the data values within boxes, which can be very large for some display trees.
+
+``` jsl
+//This message applies to all display box objects
+win = New Window( "test", a = Text Box( "my test" ) );
+a << set text( win << get xml );
+```
+
+### [GetOffset](#getoffset)[](#getoffset "Click to copy url")
+
+**Syntax:** x,y = obj \<\< GetOffset
+
+**Description:** Returns the offset of this display box relative to the parent box. You might need to use the \<\<parent message in a loop to accumulate several offsets.
+
+``` jsl
+New Window( "example",
+    MouseBox(
+        Graph Box(
+            title( "title" ),
+            Pen Size( 3 );
+            Y Function( -3 + 100 / 2 * (1 + Sin( (2 * Pi() * (x + .3)) / 100 )), x );
+        ),
+        <<settrackenable( 1 ) // put the mouse box to work, watching "tracking"
+    ,
+        <<settrack( // events from the mouse (movement, with button up or down)
+            Function( {this, pt}, // parameters: this is the mousebox, pt is mouse x,y
+                {fb, offset, t, off, size}, // local variables
+                // recalulate offset and size each time, the values can change
+                fb = this[framebox( 1 )]; // the framebox in the graph 
+                offset = [0, 0]; // accumulator to sum up the offset between framebox and mousebox
+                t = fb; // a temporary box that starts at the frame 
+                While( t != this, // and walks up to the mousebox
+                    off = t << getOffset; // ask each box for its offset to the immediate parent
+                    offset += Matrix( off ); // convert list answer to matrix so + will work
+                    t = t << parent; // crawl up to the mousebox, one box at a time
+                );
+                size = Matrix( fb << getSize ); // the frame knows its size
+                If( // over the frame box
+                    offset[1] < pt[1] < offset[1] + size[1] & offset[2] < pt[2] < offset[2]
+                     + size[2]
+                ,
+                    fb << setbackgroundcolor( "red" ),
+                    fb << setbackgroundcolor( "blue" )
+                );
+            )
+        )
+    )
+);
+```
+
+### [Horizontal Alignment](#horizontal-alignment)[](#horizontal-alignment "Click to copy url")
+
+**Syntax:** obj \<\< Horizontal Alignment( "Default"\|"Left"\|"Center"\|"Right" ); "Default"\|"Left"\|"Center"\|"Right" = obj \<\< Get Horizontal Alignment
+
+**Description:** Horizontal alignment controls the positioning of the box within a container if the box does not fill the entire space.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+lb = r[List Box( 6 )];
+lb << Border( 1 );
+Wait( 2 );
+lb << Horizontal Alignment( "Right" );
+```
+
+### [Inval](#inval)[](#inval "Click to copy url")
+
+**Syntax:** obj \<\< Inval
+
+**Description:** Invalidate the displaybox. The window will update when either the \<\<UpdateWindow message is sent or the operating system has time for the update.
+
+``` jsl
+//This message applies to all display box objects
+color = "green"; /* initial color in a variable */
+New Window( "Inval example",
+    Button Box( "red",
+        color = "red";
+        g1 << inval; /* tell the oval to redraw */
+        g2 << inval; /* tell the rectangle to redraw */
+        g1 << updateWindow; /* tell the window to update immediately */
+        // this is a busy-wait to help demonstrate the various behaviors...
+        x = Tick Seconds();
+        While( Tick Seconds() - x < .5, 0 /* delay without wait(.5) */ );
+    ),
+    Button Box( "blue",
+        color = "blue";
+        g1 << inval; /* same comments */
+        g2 << inval;
+        g1 << updateWindow;
+        x = Tick Seconds();
+        While( Tick Seconds() - x < .5, 0 );
+    ),
+    g1 = Graph Box(/* the graph does NOT watch for the color variable to change 
+                      but will use the current value of color when it reshows */
+        Fill Color( color );
+        Oval( 10, 80, 70, 50, 1 );
+    ),
+    g2 = Graph Box(
+        Fill Color( color );
+        Rect( 10, 80, 70, 50, 1 );
+    )
+);
+```
+
+### [Is Dirty](#is-dirty)[](#is-dirty "Click to copy url")
+
+**Syntax:** obj \<\< Is Dirty
+
+**Description:** Gets the document's modified status. 1 means the document has been modified and will prompt for saving; 0 means the document is not modified.
+
+**JMP Version Added:** 14
+
+``` jsl
+
+ww = New Window( "Test", <<Script, "Open(\!"$SAMPLE_DATA\Big Class.jmp\!");" );
+Show( ww << Is Dirty );
+ww << Set Dirty( 0 );
+Show( ww << Is Dirty );
+```
+
+### [Is Modal Dialog](#is-modal-dialog)[](#is-modal-dialog "Click to copy url")
+
+**Syntax:** obj \<\< Is Modal Dialog
+
+**Description:** Returns true if the window is a modal dialog. Only useful when called from a window handler callback.
+
+``` jsl
+With Window Handler(
+    New Window( "Modal Window", <<Modal ),
+    Function( {win},
+        Print( win << Is Modal Dialog() );
+        win << close window();
+    )
+);
+```
+
+### [Journal](#journal)[](#journal "Click to copy url")
+
+**Syntax:** obj \<\< Journal
+
+**Description:** Makes a journal from the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << journal;
+```
+
+### [Journal Window](#journal-window)[](#journal-window "Click to copy url")
+
+**Syntax:** obj \<\< Journal Window
+
+**Description:** Opens a journal window of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Main Window", Text Box( "Main JMP Window" ) );
+w << Journal Window;
+```
+
+### [Launch](#launch)[](#launch "Click to copy url")
+
+**Syntax:** obj \<\< Launch
+
+**Description:** Evaluates the given argument in the context of the display box.
+
+``` jsl
+//This message applies to all display box objects
+Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "example",
+    ob1 = Outline Box( "treemap launcher" ),
+    ob2 = Outline Box( "bivariate partial" ),
+    ob3 = Outline Box( "bivariate launched" )
+);
+ob1 << launch( Treemap() );
+ob2 << launch( Bivariate( Y( :height ) ) );
+ob3 << launch( Bivariate( Y( :height ), X( :weight ) ) );
+```
+
+### [Make RowState Handler](#make-rowstate-handler)[](#make-rowstate-handler "Click to copy url")
+
+**Syntax:** rs = obj \<\< Make RowState Handler( \<dt\>, function(a) )
+
+**Description:** Creates a row state handler for the given data table or the current data table. The function is called when the row states change in the filter context of the box. The argument of the function holds the rows numbers that have changed, or -1 if the row state filter has changed.
+
+#### [Single table](#single-table_1)[](#single-table_1 "Click to copy url")
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "filter test",
+    Data Filter Context Box(
+        H List Box(
+            dt << Data Filter(
+                Local,
+                Add Filter( columns( :height ), Where( :height >= 51 & :height <= 62 ) ),
+                Mode( Select( 0 ), Show( 1 ), Include( 1 ) )
+            ),
+            V List Box(
+                t = Text Box( "0 Rows Excluded" ),
+                Distribution(
+                    Continuous Distribution( Column( :weight ) ),
+                    Nominal Distribution( Column( :age ) )
+                )
+            )
+        )
+    )
+);
+updatetext = Function( {},
+    rs = t << Get Row States( dt );
+    n = 0;
+    For( ii = 1, ii <= N Rows( rs ), ii++,
+        If( Excluded( As Row State( rs[ii] ) ),
+            n
+            ++)
+    );
+    t << Set Text( Char( n ) || " Rows Excluded" );
+);
+rsupdate = Function( {a},
+    If( Is Matrix( a ),
+        updatetext()
+    )
+);
+rsh = t << Make Row State Handler( dt, rsupdate );
+updatetext();
+```
+
+#### [Where subset](#where-subset_1)[](#where-subset_1 "Click to copy url")
+
+``` jsl
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+New Window( "filter test",
+    t = Text Box( "0 Rows Excluded" ),
+    dist = Distribution(
+        Continuous Distribution( Column( :weight ) ),
+        Nominal Distribution( Column( :age ) ),
+        Local Data Filter(
+            Add Filter( columns( :height ), Where( :height >= 51 & :height <= 62 ) ),
+            Mode( Select( 0 ), Show( 1 ), Include( 1 ) )
+        ),
+        Where( :sex == "F" )
+    )
+);
+subset = dist << Get Data Table();
+updatetext = Function( {},
+    rs = Report( dist ) << Get Row States( subset );
+    n = 0;
+    For( ii = 1, ii <= N Rows( rs ), ii++,
+        If( Excluded( As Row State( rs[ii] ) ),
+            n
+            ++)
+    );
+    t << Set Text( Char( n ) || " Rows Excluded" );
+);
+rsupdate = Function( {a},
+    If( Is Matrix( a ),
+        updatetext()
+    )
+);
+rsh = Report( dist ) << Make Row State Handler( subset, rsupdate );
+updatetext();
+```
+
+### [Margin](#margin)[](#margin "Click to copy url")
+
+**Syntax:** obj \<\< Margin( sides ); sides = obj \<\< Get Margin
+
+**Description:** Margin adds space between the border of the box and adjacent boxes. Use named arguments, or provide a list of values. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical margins.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Margin );
+tb << Border( 1 );
+Wait( 2 );
+tb << Margin( Left( 20 ), Top( 20 ), Right( 20 ), Bottom( 20 ) );
+```
+
+### [Maximize Window](#maximize-window)[](#maximize-window "Click to copy url")
+
+**Syntax:** obj \<\< Maximize Window( \<state=0\|1\> )
+
+**Description:** Maximizes the window. Default argument is 1.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 1 );
+w << Maximize Window( 1 );
+Wait( 1 );
+w << Maximize Window( 0 );
+```
+
+### [Minimize Window](#minimize-window)[](#minimize-window "Click to copy url")
+
+**Syntax:** obj \<\< Minimize Window( \<state=0\|1\> )
+
+**Description:** Minimizes the window. Default argument is 1.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 1 );
+w << Minimize Window( 1 );
+Wait( 1 );
+w << Minimize Window( 0 );
+```
+
+### [Move Window](#move-window)[](#move-window "Click to copy url")
+
+**Syntax:** obj \<\< Move Window( x,y )
+
+**Description:** Moves the window to the specified position.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 2 );
+w << Move Window( 500, 500 );
+```
+
+### [Next](#next)[](#next "Click to copy url")
+
+**Syntax:** obj \<\< Next
+
+**Description:** Returns the display box after this display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+next = rbiv << Next();
+Print( next << Class Name() );
+```
+
+### [On Close](#on-close)[](#on-close "Click to copy url")
+
+**Syntax:** obj \<\< On Close( script )
+
+**Description:** Sets a script or function to run upon closing the window. This script should return 1 to allow the close, or 0 to prevent the window from closing.
+
+#### [Close Function](#close-function)[](#close-function "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << On Close(
+    Function( {this}, 
+        // Modal dialogs return Button(1) if OK is pressed, Button(-1) if cancelled
+        New Window( "Are you sure?",
+            <<modal,
+            V List Box(
+                Text Box( "Press OK to allow " || (this << Get Window Title) || " to close" ),
+                H List Box( Button Box( "OK" ), Button Box( "Cancel" ) )
+            )
+        )["button"] == 1
+    )
+);
+```
+
+#### [Close Script](#close-script)[](#close-script "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << On Close(
+    // Modal dialogs return Button(1) if OK is pressed, Button(-1) if canceled
+    New Window( "Are you sure?",
+        <<modal,
+        V List Box(
+            Text Box( "Press OK to allow the window to close" ),
+            H List Box( Button Box( "OK" ), Button Box( "Cancel" ) )
+        )
+    )["button"] == 1
+);
+```
+
+### [Optimize Display](#optimize-display)[](#optimize-display "Click to copy url")
+
+**Syntax:** obj \<\< Optimize Display
+
+**Description:** Sets a data table's column widths and window to an optimum size.
+
+**JMP Version Added:** 14
+
+``` jsl
+//This message applies to Data Table objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+dt << Optimize Display;
+```
+
+### [Pad Window](#pad-window)[](#pad-window "Click to copy url")
+
+**Syntax:** obj \<\< Pad Window( bool )
+
+**Description:** Turns window padding on or off.
+
+``` jsl
+//This message applies to all display box objects
+Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = distribution( Column( :height ) );
+r = d << report;
+r << Pad Window( 0 );
+```
+
+### [Padding](#padding)[](#padding "Click to copy url")
+
+**Syntax:** obj \<\< Padding( sides ); sides = obj \<\< Get Padding
+
+**Description:** Padding adds space between the content and the border of the box. Use named arguments, or provide a list of values. If a single value is provided, it will be applied to all sides. If two values are specified, they will be applied to horizontal and vertical padding.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Padding );
+tb << Border( 1 );
+Wait( 1 );
+tb << Padding( Left( 20 ), Top( 20 ), Right( 20 ), Bottom( 20 ) );
+```
+
+### [Page Break](#page-break)[](#page-break "Click to copy url")
+
+**Syntax:** obj \<\< Page Break
+
+**Description:** Inserts a page break before the display box.
+
+``` jsl
+//This message applies to all display box objects
+New Window( "Example",
+    ob = Outline Box( "Outline Box",
+        V List Box(
+            ob2 = Outline Box( "Outline Box 2",
+                H List Box( Text Edit Box( "Top Left" ), Text Edit Box( "Top Right" ) )
+            ),
+            ob3 = Outline Box( "Outline Box",
+                H List Box( Text Edit Box( "Bottom Left" ), Text Edit Box( "Bottom Right" ) )
+            )
+        )
+    )
+);
+ob3 << Page Break;
+```
+
+### [Parent](#parent)[](#parent "Click to copy url")
+
+**Syntax:** obj \<\< Parent
+
+**Description:** Returns the parent of this display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 1 )];
+axisParent = axisbox << parent();
+Print( axisParent << Class Name() );
+```
+
+### [Prepend](#prepend)[](#prepend "Click to copy url")
+
+**Syntax:** obj \<\< Prepend( db2 )
+
+**Description:** Add db2 to the display tree before db.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << prepend( Text Box( "=== above ===" ) );
+```
+
+### [Prev Sib](#prev-sib)[](#prev-sib "Click to copy url")
+
+**Syntax:** obj \<\< Prev Sib
+
+**Description:** Returns the previous sibling of the display box.
+
+**JMP Version Added:** 15
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 2 )];
+axisSibling = axisbox << Prev Sib();
+Print( axisSibling << Class Name() );
+```
+
+### [Print Window](#print-window)[](#print-window "Click to copy url")
+
+**Syntax:** obj \<\< Print Window
+
+**Description:** Prints the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << Print Window;
+```
+
+### [Reshow](#reshow)[](#reshow "Click to copy url")
+
+**Syntax:** obj \<\< Reshow
+
+**Description:** Invalidate the displaybox and update the window with the new content. See \<\<Inval and \<\<UpdateWindow messages if more control over timing of the update is required.
+
+``` jsl
+//This message applies to all display box objects
+color = "green"; /* initial color in a variable */
+New Window( "Reshow example",
+    Button Box( "red",
+        color = "red";
+        g << reshow/* tell the graph that something changed */;
+    ),
+    Button Box( "blue",
+        color = "blue";
+        g << reshow/* tell the graph that something changed */;
+    ),
+    g = Graph Box(/* the graph does NOT watch for the color variable to change
+                     but will use the current value of color when it reshows */
+        Fill Color( color );
+        Oval( 10, 80, 70, 50, 1 );
+    )
+);
+```
+
+### [Save Capture](#save-capture)[](#save-capture "Click to copy url")
+
+**Syntax:** obj \<\< Save Capture( \<"path"\>, \<format\>, \<Add Sibling(n)\> )
+
+**Description:** Saves a screen capture of the display box at the specified path. If a path is not given, the Save As window appears.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save Capture( "$TEMP/jmp_example.png", "png" );
+```
+
+### [Save HTML](#save-html)[](#save-html "Click to copy url")
+
+**Syntax:** obj \<\< Save HTML( \<pathname\>, \<format\> )
+
+**Description:** Saves HTML source and folder of graphics in format specified.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save HTML( "$TEMP/jmp_example.html" );
+```
+
+### [Save Interactive HTML](#save-interactive-html)[](#save-interactive-html "Click to copy url")
+
+**Syntax:** obj \<\< Save Interactive HTML( \<pathname\>, \<Boolean\> )
+
+**Description:** Saves Interactive HTML with Data to a file. The Boolean argument represents the report being static.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save Interactive HTML( "$TEMP/jmp_example.html" );
+```
+
+### [Save Journal](#save-journal)[](#save-journal "Click to copy url")
+
+**Syntax:** obj \<\< Save Journal( \<pathname\> )
+
+**Description:** Saves journal source for the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save Journal( "$TEMP/jmp_example.jrn" );
+```
+
+### [Save MSWord](#save-msword)[](#save-msword "Click to copy url")
+
+**Syntax:** obj \<\< Save MSWord( \<pathname\>, \<format\> )
+
+**Description:** Saves the display box as a Microsoft Word document. (Windows Only)
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save MSWord( "$TEMP/jmp_example.doc" );
+```
+
+### [Save PDF](#save-pdf)[](#save-pdf "Click to copy url")
+
+**Syntax:** obj \<\< Save PDF( \<pathname\>, \<Show Page Setup(0\|1)\>, \<Portrait(0\|1)\> )
+
+**Description:** Saves a PDF of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save PDF( "$TEMP/jmp_example.pdf" );
+```
+
+### [Save Picture](#save-picture)[](#save-picture "Click to copy url")
+
+**Syntax:** obj \<\< Save Picture( \<pathname\>, \<format\>, \<Scale(factor)\>, \<Type("Bitmap" \| "Scalable")\>, \<View("Picture" \| "Screen" \| "Print"), \<Appearance("Default" \| "Current")\>, \<SubRect(Left(number), Top(number), Right(number), Bottom(number))\> )
+
+**Description:** Saves a picture of the display box. Supported formats are EMF(Windows), PICT(Macintosh), JPEG or JPG, GIF, or PNG. The optional Scale argument will render the image at a scaled resolution. Scaling requires that the display box be stretchable. The Type argument determines whether the result will be a scalable vector image or a bitmap. By default a scalable image is returned, which is suitable for saving to vector formats like PDF. The View option changes the behavior of some boxes. The default option of "Picture" draws the report as it would when exporting to an image format, with scrolled areas fully shown. View mode of "Screen" draws the report as seen on-screen, and "Print" draws the report as it does when printing, without any of the page setup features. The SubRect option will capture a portion of the resulting image rather than a full image. The Appearance option can change from the "Default" output colors to the "Current" colors as seen on-screen. The View, SubRect, and Appearance options are only supported for Type "Bitmap".
+
+#### [Default](#default_1)[](#default_1 "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save Picture( "$TEMP/jmp_example.png", "png" );
+```
+
+#### [Scale](#scale_1)[](#scale_1 "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv[FrameBox( 1 )] << Set Stretch( "Window", "Window" );
+rbiv << Save Picture( "$TEMP/jmp_example_scale.png", "png", Scale( 1.5 ) );
+New Window( "scaled image", New Image( "$TEMP/jmp_example_scale.png" ) );
+```
+
+#### [View and Appearance](#view-and-appearance_1)[](#view-and-appearance_1 "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate(
+    Y( :weight ),
+    X( :height ),
+    Fit Line( {Line Color( {212, 73, 88} )} ),
+    Fit Polynomial( 3, {Line Color( {61, 174, 70} )} ),
+    Kernel Smoother( 1, 1, 0.5, 0 )
+);
+rbiv = biv << report;
+rbiv << Save Picture(
+    "$TEMP/jmp_example_screen.png",
+    "png",
+    View( "Screen" ),
+    Appearance( "Current" )
+);
+rbiv << Save Picture(
+    "$TEMP/jmp_example_print.png",
+    "png",
+    View( "Print" ),
+    Appearance( "Default" )
+);
+New Window( "Example",
+    H List Box(
+        New Image( "$TEMP/jmp_example_screen.png" ),
+        New Image( "$TEMP/jmp_example_print.png" )
+    )
+);
+```
+
+### [Save Presentation](#save-presentation)[](#save-presentation "Click to copy url")
+
+**Syntax:** obj \<\< Save Presentation( "filename.pptx", \<Template("path\to\my_template.pptx")\>, \<Insert(Begin\|End\|#) \| Replace(Begin\|End\|#) \| Append\>, \<Outline Titles(None\|Hide\|TopLeft\|TopRight\|BottomLeft\|BottomRight)\>, \<"EMF"\|"PNG"\|"JPG"\|"Native"\> )
+
+**Description:** Saves the display box tables and graphs slides in a presentation. The presentation can be opened with Microsoft PowerPoint or other presentation software.
+
+``` jsl
+Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save Presentation( "$TEMP/jmp_example.pptx" );
+Open( "$TEMP/jmp_example.pptx" );
+```
+
+### [Save RTF](#save-rtf)[](#save-rtf "Click to copy url")
+
+**Syntax:** obj \<\< Save RTF( \<pathname\>, \<format\> )
+
+**Description:** Saves RTF source with graphics in format specified.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Save RTF( "$TEMP/jmp_example.rtf", "png" );
+```
+
+### [Save Text](#save-text)[](#save-text "Click to copy url")
+
+**Syntax:** obj \<\< Save Text( \<pathname\>, \<format\> )
+
+**Description:** Saves a file containing the text of the display box.
+
+``` jsl
+//This message applies to all display box objects
+win = New Window( "Example", a = Text Box( "Example Text" ) );
+a << save text( "$TEMP/jmp_example.txt" );
+```
+
+### [Save Window Report](#save-window-report)[](#save-window-report "Click to copy url")
+
+**Syntax:** obj \<\< Save Window Report( pathname, \<embed data(0\|1)\> )
+
+**Description:** Saves the current report window to a JMP report file (.jrp).
+
+**JMP Version Added:** 16
+
+``` jsl
+//This message can be sent to any display box object but will be applied to the report window
+Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = distribution( Column( :height ) );
+d << Save Window Report( "$DOCUMENTS/test.jrp", embed data( 1 ) );
+```
+
+### [Scroll Window](#scroll-window)[](#scroll-window "Click to copy url")
+
+**Syntax:** obj \<\< Scroll Window( DisplayBox \| \<Relative(\<v\> \| \<h\>,\<v\>)\> \| \<Absolute(\<v\> \| \<h\>,\<v\>) )
+
+**Description:** Adjust the window scrollbar to bring the given DisplayBox into view, or scroll a relative number of pixels, or scroll to an absolute pixel location. In place of a number of pixels the keywords "Start" or "End" can be used.
+
+#### [Absolute](#absolute)[](#absolute "Click to copy url")
+
+``` jsl
+
+Open( "$SAMPLE_DATA/Blood Pressure.jmp" );
+fm = Fit Model(
+    Y( :BP 8M, :BP 12M, :BP 6M, :BP 8W, :BP 12W, :BP 6W, :BP 8F, :BP 12F, :BP 6F ),
+    Effects( :Subject, :Dose ),
+    Personality( "Manova" ),
+    Run
+);
+fm << setwindowsize( 600, 600 ); // shrink the window
+fm << scroll window( Absolute( "End", "End" ) );
+Wait( 1 );
+fm << scroll window( Absolute( 0, 300 ) );
+Wait( 1 );
+```
+
+#### [Box](#box)[](#box "Click to copy url")
+
+``` jsl
+
+Open( "$SAMPLE_DATA/Blood Pressure.jmp" );
+fm = Fit Model(
+    Y( :BP 8M, :BP 12M, :BP 6M, :BP 8W, :BP 12W, :BP 6W, :BP 8F, :BP 12F, :BP 6F ),
+    Effects( :Subject, :Dose ),
+    Personality( "Manova" ),
+    Run
+);
+fm << setwindowsize( 600, 600 ); // shrink the window
+For( i = 1, i <= 5, i++, // repeatedly, bring each frame box into view for 1/2 second
+    fm << scroll window( Report( fm )[framebox( 2 )] );
+    Wait( .5 );
+    fm << scroll window( Report( fm )[framebox( 3 )] );
+    Wait( .5 );
+    fm << scroll window( Report( fm )[framebox( 1 )] );
+    Wait( .5 );
+);
+```
+
+#### [Relative](#relative)[](#relative "Click to copy url")
+
+``` jsl
+
+Open( "$SAMPLE_DATA/Blood Pressure.jmp" );
+fm = Fit Model(
+    Y( :BP 8M, :BP 12M, :BP 6M, :BP 8W, :BP 12W, :BP 6W, :BP 8F, :BP 12F, :BP 6F ),
+    Effects( :Subject, :Dose ),
+    Personality( "Manova" ),
+    Run
+);
+fm << setwindowsize( 600, 600 ); // shrink the window
+fm << scroll window( Relative( 300 ) );
+Wait( 1 );
+fm << scroll window( Relative( -50 ) );
+Wait( 1 );
+fm << scroll window( Relative( "Start" ) );
+Wait( 1 );
+```
+
+### [Select](#select)[](#select "Click to copy url")
+
+**Syntax:** obj \<\< Select
+
+**Description:** Selects this object for use by Edit menu commands.
+
+``` jsl
+//This message applies to all display box objects
+New Window( "Example", ex = Button Box( "Press Me" ) );
+ex << Select;
+```
+
+### [Set Content Size](#set-content-size)[](#set-content-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Content Size( x,y )
+
+**Description:** Sets the content size within the window.
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Test",
+    lb = List Box( {"a", "b", "c", "d"} ),
+    Button Box( "Enable 2nd item",
+        lb << enable item( 2, 1 );
+        Show( lb << item enabled( 2 ) );
+    ),
+    Button Box( "Disable 2nd item",
+        lb << enable item( 2, 0 );
+        Show( lb << item enabled( 2 ) );
+    )
+);
+Wait( 2 );
+w << Set Content Size( 400, 300 );
+```
+
+### [Set Dirty](#set-dirty)[](#set-dirty "Click to copy url")
+
+**Syntax:** obj \<\< Set Dirty
+
+**Description:** Sets the document's modified status. 0 will not prompt for saving; 1 will prompt.
+
+**JMP Version Added:** 14
+
+``` jsl
+
+ww = New Window( "Test", <<Script, "Open(\!"$SAMPLE_DATA\Big Class.jmp\!");" );
+Show( ww << Is Dirty );
+ww << Set Dirty( 0 );
+Show( ww << Is Dirty );
+```
+
+### [Set Height](#set-height)[](#set-height "Click to copy url")
+
+**Syntax:** obj \<\< Set Height( width )
+
+**Description:** Sets the height of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Set Height( 150 );
+```
+
+### [Set Main Window](#set-main-window)[](#set-main-window "Click to copy url")
+
+**Syntax:** obj \<\< Set Main Window
+
+**Description:** Set the window to be the main window in JMP and sets the prior main window to be a normal window
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Main Window", Text Box( "Main JMP Window" ) );
+w << Set Main Window;
+```
+
+### [Set Max Size](#set-max-size)[](#set-max-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Max Size( width,height )
+
+**Description:** Sets the maximum size of this display box for purposes of auto-stretching.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Set Max Size( 500, 500 );
+fb << Get Max Size;
+```
+
+### [Set Min Size](#set-min-size)[](#set-min-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Min Size( width,height )
+
+**Description:** Sets the minimum size of this display box for purposes of auto-stretching.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Set Min Size( 30, 30 );
+fb << Get Min Size;
+```
+
+### [Set Page Setup](#set-page-setup)[](#set-page-setup "Click to copy url")
+
+**Syntax:** obj \<\< Set Page Setup( \<margins(left, top, right, bottom)\>, \<scale(s)\>, \<portrait(0\|1)\>, \<paper size(p)\>, \<Table of Contents(always, never, default)\> )
+
+**Description:** Sets the page setup information that is used during printing or saving as pdf. A Table of Contents can optionally be generated from Outline Boxes.
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Window", Outline Box( "TOC", Text Box( "Page Setup Test" ) ) );
+w << Set page setup(
+    margins( 1, 1, 1, 1 ),
+    scale( 1 ),
+    portrait( 1 ),
+    paper size( "Letter" ),
+    Table of Contents( "always" )
+);
+w << Save pdf( "$DOCUMENTS\test.pdf" );
+```
+
+### [Set Print Footers](#set-print-footers)[](#set-print-footers "Click to copy url")
+
+**Syntax:** obj \<\< Set Print Footers( left footer, center footer, right header )
+
+**Description:** Sets the left, center, and right footers for printed output
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Window", Text Box( "Footer Test" ) );
+w << Set Print Footers(
+    "Today is: &d;"/*left*/, "&wt;"/*center*/,
+    "Page &pn; of &pc;"/*right*/
+);
+w << Print Window;
+```
+
+### [Set Print Headers](#set-print-headers)[](#set-print-headers "Click to copy url")
+
+**Syntax:** obj \<\< Set Print Headers( left header, center header, right header )
+
+**Description:** Sets the left, center, and right headers for printed output
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Window", Text Box( "Header Test" ) );
+w << Set Print Headers(
+    "Today is: &d;"/*left*/, "&wt;"/*center*/,
+    "Page &pn; of &pc;"/*right*/
+);
+w << Print Window;
+```
+
+### [Set Property](#set-property)[](#set-property "Click to copy url")
+
+**Syntax:** obj \<\< Set Property( "property", value )
+
+**Description:** Sets the value for the named property for the display box.
+
+``` jsl
+New Window( "Example", bb = Button Box( "Press Me", Print( "Pressed" ) ) );
+bb << Set Property( "Enabled", 0 );
+```
+
+### [Set Report Title](#set-report-title)[](#set-report-title "Click to copy url")
+
+**Syntax:** obj \<\< Set Report Title( "string" )
+
+**Description:** Changes the report title.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Set Report Title( "New Title" );
+```
+
+### [Set Stretch](#set-stretch)[](#set-stretch "Click to copy url")
+
+**Syntax:** obj \<\< Set Stretch( x,y )
+
+**Description:** Sets the horizontal and vertical stretching behavior of the box. Boxes that stretch with Window will resize as the window or splitter size changes. Boxes that stretch to Fill will stretch to fill available space in their container. Boxes with stretching turned Off generally will not stretch. Most boxes default to Neutral, which means that they will determine their behavior based on their child boxes.
+
+**JMP Version Added:** 16
+
+#### [Stretch to Fill](#stretch-to-fill)[](#stretch-to-fill "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+New Window( "Stretch",
+    V List Box(
+        H List Box( Text Edit Box( "String1" ), Text Edit Box( "String2" ) ),
+        Spacer Box( Size( 20, 20 ), Color( "Light Red" ), <<Set Stretch( "Fill", "Off" ) )
+    )
+);
+```
+
+#### [Stretch with Window](#stretch-with-window)[](#stretch-with-window "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+New Window( "Example",
+    H List Box(
+        tv = Text Box( "V+V", <<rotate text( left ) ),
+        V List Box(
+            Text Box( "resize the containing window" ),
+            th = Text Box( "H+H" ),
+            ts = Spacer Box( <<Size( 10, 30 ), <<Color( "blue" ) )
+        )
+    )
+);
+tv << Vertical Alignment( "Center" );
+th << Horizontal Alignment( "Center" );
+th << Set Stretch( "Window", "Off" );
+ts << Set Min Size( 5, 20 );
+ts << Set Max Size( 100000, 100 );
+ts << Set Stretch( "Window", "Window" );
+```
+
+### [Set Summary Behavior](#set-summary-behavior)[](#set-summary-behavior "Click to copy url")
+
+**Syntax:** obj \<\< Set Summary Behavior( "Default"\|"Visible"\|"Collapse" )
+
+**Description:** Sets the behavior of the box when a report is viewed in Summary mode.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+d << Report View( "Summary" );
+r = d << Report;
+tb = r[Table Box( 1 )];
+tb << Set Summary Behavior( "Visible" );
+```
+
+### [Set Width](#set-width)[](#set-width "Click to copy url")
+
+**Syntax:** obj \<\< Set Width( width )
+
+**Description:** Sets the width of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << Set Width( 400 );
+```
+
+### [Set Window Icon](#set-window-icon)[](#set-window-icon "Click to copy url")
+
+**Syntax:** obj \<\< Set Window Icon( icon name )
+
+**Description:** Sets the window icon.
+
+``` jsl
+//This message applies to all display box objects
+w = New Window( "Example", ex = Button Box( "New Analysis" ) );
+w << Set Window Icon( "Scatter3D" );
+```
+
+### [Set Window Size](#set-window-size)[](#set-window-size "Click to copy url")
+
+**Syntax:** obj \<\< Set Window Size( x,y )
+
+**Description:** Sets the size of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << Set Window Size( 800, 1200 );
+```
+
+### [Set Window Title](#set-window-title)[](#set-window-title "Click to copy url")
+
+**Syntax:** obj \<\< Set Window Title( "string" )
+
+**Description:** Changes the window title.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Set Window Title( "New Title" );
+```
+
+### [Show Properties](#show-properties)[](#show-properties "Click to copy url")
+
+**Syntax:** obj \<\< Show Properties
+
+**Description:** Displays a property editor for display boxes
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Show Properties();
+```
+
+### [Show Tree Structure](#show-tree-structure)[](#show-tree-structure "Click to copy url")
+
+**Syntax:** obj \<\< Show Tree Structure
+
+**Description:** Displays a hierarchical tree structure of the display box and its related nodes.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rbiv << Show Tree Structure();
+```
+
+### [Show Window](#show-window)[](#show-window "Click to copy url")
+
+**Syntax:** obj \<\< Show Window( state=0\|1 )
+
+**Description:** Shows or hides the window. This is useful for hiding windows temporarily. On by default.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+Wait( 1 );
+w << Show Window( 0 );
+Wait( 2 );
+w << Show Window( 1 );
+```
+
+### [Sib](#sib)[](#sib "Click to copy url")
+
+**Syntax:** obj \<\< Sib
+
+**Description:** Returns the sibling of the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+axisbox = rbiv[axis box( 1 )];
+axisSibling = axisbox << sib();
+Print( axisSibling << Class Name() );
+```
+
+### [Sib Append](#sib-append)[](#sib-append "Click to copy url")
+
+**Syntax:** obj \<\< Sib Append( Display box, Horizontal\|Vertical )
+
+**Description:** Adds a display box immediately after this display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r()[framebox( 1 )];
+fb << sib append(
+    Text Box( "============ after ==============", Rotate Text( "Right" ) ),
+    "Horizontal"
+);
+fb << sib append( Text Box( "=== below ===" ), "Vertical" );
+```
+
+### [Sib Prepend](#sib-prepend)[](#sib-prepend "Click to copy url")
+
+**Syntax:** obj \<\< Sib Prepend( Display box, Horizontal\|Vertical )
+
+**Description:** Adds a display box immediately before this display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/big class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+fb = r[framebox( 1 )];
+fb << sib prepend(
+    Text Box( "    ============ before ==============", Rotate Text( "Right" ) ),
+    "Horizontal"
+);
+fb << sib prepend( Text Box( "=== above ===" ), "Vertical" );
+```
+
+### [Size Window](#size-window)[](#size-window "Click to copy url")
+
+**Syntax:** obj \<\< Size Window( x,y )
+
+**Description:** Sets the size of the window.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << Size Window( 500, 500 );
+```
+
+### [Text Color](#text-color)[](#text-color "Click to copy url")
+
+**Syntax:** obj \<\< Text Color( color ); color = obj \<\< Get Text Color
+
+**Description:** Text will be drawn using the text color if it has been set. If the property has not been set, the box will inherit the text color of the containing box.
+
+**JMP Version Added:** 15
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Text Color );
+Wait( 2 );
+tb << Text Color( "Red" );
+```
+
+### [Top Parent](#top-parent)[](#top-parent "Click to copy url")
+
+**Syntax:** obj \<\< Top Parent
+
+**Description:** Returns the root parent of this display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+rootParent = rbiv << Top Parent();
+Print( rootParent << Class Name() );
+```
+
+### [UI Only](#ui-only)[](#ui-only "Click to copy url")
+
+**Syntax:** obj \<\< UI Only( state=0\|1 ); state = obj \<\< Get UI Only
+
+### [Update Window](#update-window)[](#update-window "Click to copy url")
+
+**Syntax:** obj \<\< Update Window
+
+**Description:** Update the window holding the displaybox if there are invalidated regions. The \<\<Inval message creates invalidated regions.
+
+``` jsl
+//This message applies to all display box objects
+color = "green"; /* initial color in a variable */
+New Window( "UpdateWindow example",
+    Button Box( "red",
+        color = "red";
+        // try commenting out each of the 4 lines that follow, run the script,
+        // click the buttons, and resize the windows (for example) to force a
+        // redraw.  All 4 lines are important, though the last two may be
+        // slightly different on Windows and Mac OSs.
+        g1 << inval; /* tell the oval to redraw */
+        g2 << inval; /* tell the rectangle to redraw */
+        g1 << updateWindow; /* tell the oval window to update immediately */
+        g2 << updateWindow; /* tell the rect window to update immediately */
+        // this is a busy-wait to help demonstrate the various behaviors...
+        x = Tick Seconds();
+        While( Tick Seconds() - x < .5, 0 /* delay without wait(.5) */ );
+    ),
+    Button Box( "blue",
+        color = "blue";
+        g1 << inval; /* same comments */
+        g2 << inval;
+        g1 << updateWindow;
+        g2 << updateWindow;
+        x = Tick Seconds();
+        While( Tick Seconds() - x < .5, 0 );
+    )
+);
+New Window( "oval",
+    g1 = Graph Box(/* the graph does NOT watch for the color variable to change
+                      but will use the current value of color when it reshows */
+        Fill Color( color );
+        Oval( 10, 80, 70, 50, 1 );
+    )
+);
+New Window( "rect",
+    g2 = Graph Box(
+        Fill Color( color );
+        Rect( 10, 80, 70, 50, 1 );
+    )
+);
+```
+
+### [User Resizable](#user-resizable)[](#user-resizable "Click to copy url")
+
+**Syntax:** obj \<\< User Resizable; obj \<\< Get User Resizable
+
+**Description:** If the box is user resizable, the cursor will change near the bottom and right edges to allow drag-and-drop resizing.
+
+``` jsl
+root1 = Tree Node( "Parent 1" );
+root2 = Tree Node( "Parent 2" );
+c1 = Tree Node( "Child 1" );
+c2 = Tree Node( "Child 2" );
+c3 = Tree Node( "Child 3" );
+c4 = Tree Node( "Child 4" );
+root1 << Append( c1 );
+root1 << Append( c2 );
+root2 << Append( c3 );
+root2 << Append( c4 );
+New Window( "resize",
+    H Splitter Box(
+        Size( 600, 200 ),
+        tree = Tree Box( {root1, root2} ),
+        scroll = Scroll Box(
+            Size( 300, 200 ),
+            Picture Box( Open( "$SAMPLE_IMAGES/tile.jpg", jpg ) )
+        )
+    )
+);
+tree << Set Stretch( "Window", "Window" ) << Set Max Size( 10000, 10000 );
+scroll << Set Stretch( "Window", "Window" ) << Set Max Size( 10000, 10000 );
+Wait( 2 );
+tree << User Resizable( {0, 0} );
+scroll << User Resizable( {0, 0} );
+```
+
+### [Vertical Alignment](#vertical-alignment)[](#vertical-alignment "Click to copy url")
+
+**Syntax:** obj \<\< Vertical Alignment( "Default"\|"Top"\|"Center"\|"Bottom" ); "Default"\|"Top"\|"Center"\|"Bottom" = obj \<\< Get Vertical Alignment
+
+**Description:** Vertical alignment controls the positioning of the box within a container if the box does not fill the entire space.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+lb = r[List Box( 6 )];
+lb << Set Horizontal( 1 );
+lb = r[List Box( 7 )];
+lb << Border( 1 );
+Wait( 2 );
+lb << Vertical Alignment( "Bottom" );
+```
+
+### [Visibility](#visibility)[](#visibility "Click to copy url")
+
+**Syntax:** obj \<\< Visibility( "Visible"\|"Hidden"\|"Collapse" ); "Visible"\|"Hidden"\|"Collapse" = obj \<\< Get Visibility
+
+**Description:** Visibility determines whether a box is shown and whether it takes up space. The default value of "Visible" means that the object will be shown. A "Hidden" box is not shown but still takes up space, while a "Collapsed" box takes up no space in the layout.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+d = dt << Distribution( Column( :height ) );
+r = d << report;
+tb = r[Table Box( 1 )];
+Show( tb << Get Visibility );
+Wait( 1 );
+tb << Visibility( "Collapse" );
+Show( tb << Get Visibility );
+```
+
+### [Window Class Name](#window-class-name)[](#window-class-name "Click to copy url")
+
+**Syntax:** obj \<\< Window Class Name
+
+**Description:** Returns the name of the window class for the display box.
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Bivariate( y( :weight ), x( :height ) );
+rbiv = biv << report;
+Show( biv << Window Class Name() );
+Show( rbiv << Window Class Name() );
+```
+
+### [XPath](#xpath)[](#xpath "Click to copy url")
+
+**Syntax:** obj \<\< XPath( XPath expression, \<English(0\|1)\>, \<NoData(0\|1)\> )
+
+**Description:** Applies an XPath expression to the XML representation of the display tree and returns the results. By default, strings are returned in the local language, and the XML includes data values within some boxes. Use the English option to return English strings where available. Use the NoData option to omit the data values within boxes, which is useful for performance when your query is based only on box attributes.
+
+#### [Attributes](#attributes)[](#attributes "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//OutlineBox[@isOpen='false']" )) << Close( 0 );
+```
+
+#### [Box type](#box-type)[](#box-type "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//TextEditBox" )) << Text Color( "Green" );
+```
+
+#### [Child box](#child-box)[](#child-box "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//OutlineBox[text()='Summary of Fit']/TableBox" )) <<
+Make Into Data Table;
+```
+
+#### [Data](#data)[](#data "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//NumberColBoxItem[text()='40']/parent::*" )) <<
+Text Color( "Green" );
+```
+
+#### [Display Seg](#display-seg)[](#display-seg "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//MarkerSeg" )) << Set Marker( "Square" );
+```
+
+#### [Text](#text)[](#text "Click to copy url")
+
+``` jsl
+//This message applies to all display box objects
+dt = Open( "$SAMPLE_DATA/Big Class.jmp" );
+biv = dt << Run Script( "Bivariate" );
+(Report( biv ) << xpath( "//OutlineBox[text()='Parameter Estimates']" )) << Close;
+```
+
+### [Zoom Window](#zoom-window)[](#zoom-window "Click to copy url")
+
+**Syntax:** obj \<\< Zoom Window
+
+**Description:** Resizes the window to be large enough to show all of its contents.
+
+``` jsl
+//This message applies to all display box objects
+w = Open( "$SAMPLE_DATA/Big Class.jmp" );
+w << Set Window Size( 80, 120 );
+Wait( 2 );
+w << Zoom Window;
+```
+
+[ Previous](ListBox.html "ListBox") [Next ](MapSeg.html "MapSeg")
+
+------------------------------------------------------------------------
+
+© 2026 JMP Statistical Discovery LLC. All Rights Reserved.

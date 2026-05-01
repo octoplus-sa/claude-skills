@@ -1,0 +1,14 @@
+{
+  "name": "octoplus-sa-claude-skills",
+  "owner": {
+    "name": "Octoplus"
+  },
+  "plugins": [
+    {
+      "name": "jmp-jsl",
+      "source": "./jmp-jsl",
+      "description": "JMP Scripting Language (JSL) skill for SAS JMP 19 — write, debug, and review .jsl scripts and JMP add-ins with bundled offline references.",
+      "strict": false
+    }
+  ]
+}

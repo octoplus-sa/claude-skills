@@ -1,0 +1,373 @@
+# JMP Scripting Index — offline mirror
+
+Markdown mirror of <https://jsl.jmp.com/>.
+Each entry below is a JSL function, display box, message, or category overview
+with the official runnable example. Greppable; cheap to load.
+
+**Lookup tip:** if you're searching for a specific function or message,
+grep this file for the name, then open the linked file.
+
+---
+
+- [`AlignmentGridBox`](All Categories/Display Boxes/AlignmentGridBox.md) — All Categories / Display Boxes
+- [`AxisBox`](All Categories/Display Boxes/AxisBox.md) — All Categories / Display Boxes
+- [`BarSeg`](All Categories/Display Boxes/BarSeg.md) — All Categories / Display Boxes
+- [`BorderBox`](All Categories/Display Boxes/BorderBox.md) — All Categories / Display Boxes
+- [`BoxPlotSeg`](All Categories/Display Boxes/BoxPlotSeg.md) — All Categories / Display Boxes
+- [`BusyLightBox`](All Categories/Display Boxes/BusyLightBox.md) — All Categories / Display Boxes
+- [`ButtonBox`](All Categories/Display Boxes/ButtonBox.md) — All Categories / Display Boxes
+- [`CalendarBox`](All Categories/Display Boxes/CalendarBox.md) — All Categories / Display Boxes
+- [`CellPlotBox`](All Categories/Display Boxes/CellPlotBox.md) — All Categories / Display Boxes
+- [`CenterBox`](All Categories/Display Boxes/CenterBox.md) — All Categories / Display Boxes
+- [`CheckBoxBox`](All Categories/Display Boxes/CheckBoxBox.md) — All Categories / Display Boxes
+- [`ColBox`](All Categories/Display Boxes/ColBox.md) — All Categories / Display Boxes
+- [`ColListBox`](All Categories/Display Boxes/ColListBox.md) — All Categories / Display Boxes
+- [`ColorBox`](All Categories/Display Boxes/ColorBox.md) — All Categories / Display Boxes
+- [`ColSpanBox`](All Categories/Display Boxes/ColSpanBox.md) — All Categories / Display Boxes
+- [`ColStackBox`](All Categories/Display Boxes/ColStackBox.md) — All Categories / Display Boxes
+- [`ColumnFieldBox`](All Categories/Display Boxes/ColumnFieldBox.md) — All Categories / Display Boxes
+- [`ComboBox`](All Categories/Display Boxes/ComboBox.md) — All Categories / Display Boxes
+- [`CompositionBox`](All Categories/Display Boxes/CompositionBox.md) — All Categories / Display Boxes
+- [`ContourSeg`](All Categories/Display Boxes/ContourSeg.md) — All Categories / Display Boxes
+- [`CrosstabBox`](All Categories/Display Boxes/CrosstabBox.md) — All Categories / Display Boxes
+- [`CustomBox`](All Categories/Display Boxes/CustomBox.md) — All Categories / Display Boxes
+- [`DataBrowserBox`](All Categories/Display Boxes/DataBrowserBox.md) — All Categories / Display Boxes
+- [`DataColumnNameBox`](All Categories/Display Boxes/DataColumnNameBox.md) — All Categories / Display Boxes
+- [`DataEditBox`](All Categories/Display Boxes/DataEditBox.md) — All Categories / Display Boxes
+- [`DataFilterContextBox`](All Categories/Display Boxes/DataFilterContextBox.md) — All Categories / Display Boxes
+- [`DataFilterSourceBox`](All Categories/Display Boxes/DataFilterSourceBox.md) — All Categories / Display Boxes
+- [`DataTableColBox`](All Categories/Display Boxes/DataTableColBox.md) — All Categories / Display Boxes
+- [`DataTablePlotColBox`](All Categories/Display Boxes/DataTablePlotColBox.md) — All Categories / Display Boxes
+- [`Design Box`](All Categories/Display Boxes/Design Box.md) — All Categories / Display Boxes
+- [`DFIntMinMaxBox`](All Categories/Display Boxes/DFIntMinMaxBox.md) — All Categories / Display Boxes
+- [`Display3DBox`](All Categories/Display Boxes/Display3DBox.md) — All Categories / Display Boxes
+- [`dragHolder`](All Categories/Display Boxes/dragHolder.md) — All Categories / Display Boxes
+- [`DropBox`](All Categories/Display Boxes/DropBox.md) — All Categories / Display Boxes
+- [`EvalContextBox`](All Categories/Display Boxes/EvalContextBox.md) — All Categories / Display Boxes
+- [`ExcerptBox`](All Categories/Display Boxes/ExcerptBox.md) — All Categories / Display Boxes
+- [`FilterColSelector`](All Categories/Display Boxes/FilterColSelector.md) — All Categories / Display Boxes
+- [`FilterFieldBox`](All Categories/Display Boxes/FilterFieldBox.md) — All Categories / Display Boxes
+- [`FrameBox`](All Categories/Display Boxes/FrameBox.md) — All Categories / Display Boxes
+- [`gdisplaybox`](All Categories/Display Boxes/gdisplaybox.md) — All Categories / Display Boxes
+- [`gline`](All Categories/Display Boxes/gline.md) — All Categories / Display Boxes
+- [`GlobalBox`](All Categories/Display Boxes/GlobalBox.md) — All Categories / Display Boxes
+- [`gpin`](All Categories/Display Boxes/gpin.md) — All Categories / Display Boxes
+- [`gpolygon`](All Categories/Display Boxes/gpolygon.md) — All Categories / Display Boxes
+- [`GraphBuilderBox`](All Categories/Display Boxes/GraphBuilderBox.md) — All Categories / Display Boxes
+- [`GridCellBox`](All Categories/Display Boxes/GridCellBox.md) — All Categories / Display Boxes
+- [`GridMultiCellBox`](All Categories/Display Boxes/GridMultiCellBox.md) — All Categories / Display Boxes
+- [`gshape`](All Categories/Display Boxes/gshape.md) — All Categories / Display Boxes
+- [`gtext`](All Categories/Display Boxes/gtext.md) — All Categories / Display Boxes
+- [`HelpBox`](All Categories/Display Boxes/HelpBox.md) — All Categories / Display Boxes
+- [`HierBox`](All Categories/Display Boxes/HierBox.md) — All Categories / Display Boxes
+- [`HistSeg`](All Categories/Display Boxes/HistSeg.md) — All Categories / Display Boxes
+- [`IconBox`](All Categories/Display Boxes/IconBox.md) — All Categories / Display Boxes
+- [`IconStringColBox`](All Categories/Display Boxes/IconStringColBox.md) — All Categories / Display Boxes
+- [`IfBox`](All Categories/Display Boxes/IfBox.md) — All Categories / Display Boxes
+- [`IfSeg`](All Categories/Display Boxes/IfSeg.md) — All Categories / Display Boxes
+- [`LabelBox`](All Categories/Display Boxes/LabelBox.md) — All Categories / Display Boxes
+- [`LegendBox`](All Categories/Display Boxes/LegendBox.md) — All Categories / Display Boxes
+- [`LineSeg`](All Categories/Display Boxes/LineSeg.md) — All Categories / Display Boxes
+- [`LinesSeg`](All Categories/Display Boxes/LinesSeg.md) — All Categories / Display Boxes
+- [`LineUpBox`](All Categories/Display Boxes/LineUpBox.md) — All Categories / Display Boxes
+- [`LineUpRulerBox`](All Categories/Display Boxes/LineUpRulerBox.md) — All Categories / Display Boxes
+- [`ListBoxBox`](All Categories/Display Boxes/ListBoxBox.md) — All Categories / Display Boxes
+- [`ListBox`](All Categories/Display Boxes/ListBox.md) — All Categories / Display Boxes
+- [`MapSeg`](All Categories/Display Boxes/MapSeg.md) — All Categories / Display Boxes
+- [`MarkerSeg`](All Categories/Display Boxes/MarkerSeg.md) — All Categories / Display Boxes
+- [`MatrixBox`](All Categories/Display Boxes/MatrixBox.md) — All Categories / Display Boxes
+- [`MosaicSeg`](All Categories/Display Boxes/MosaicSeg.md) — All Categories / Display Boxes
+- [`MouseBox`](All Categories/Display Boxes/MouseBox.md) — All Categories / Display Boxes
+- [`MultiTblNumColBox`](All Categories/Display Boxes/MultiTblNumColBox.md) — All Categories / Display Boxes
+- [`MultiTblPackColBox`](All Categories/Display Boxes/MultiTblPackColBox.md) — All Categories / Display Boxes
+- [`MultiTblPlotColBox`](All Categories/Display Boxes/MultiTblPlotColBox.md) — All Categories / Display Boxes
+- [`MultiTblStrColBox`](All Categories/Display Boxes/MultiTblStrColBox.md) — All Categories / Display Boxes
+- [`NodeDisplayDragBox`](All Categories/Display Boxes/NodeDisplayDragBox.md) — All Categories / Display Boxes
+- [`NodeDisplayNewArcBox`](All Categories/Display Boxes/NodeDisplayNewArcBox.md) — All Categories / Display Boxes
+- [`NomAxisBox`](All Categories/Display Boxes/NomAxisBox.md) — All Categories / Display Boxes
+- [`NumberBox`](All Categories/Display Boxes/NumberBox.md) — All Categories / Display Boxes
+- [`NumberColBox`](All Categories/Display Boxes/NumberColBox.md) — All Categories / Display Boxes
+- [`NumberColEditBox`](All Categories/Display Boxes/NumberColEditBox.md) — All Categories / Display Boxes
+- [`NumberEditBox`](All Categories/Display Boxes/NumberEditBox.md) — All Categories / Display Boxes
+- [`OutlineBox`](All Categories/Display Boxes/OutlineBox.md) — All Categories / Display Boxes
+- [`OverlayListBox`](All Categories/Display Boxes/OverlayListBox.md) — All Categories / Display Boxes
+- [`OwnerBox`](All Categories/Display Boxes/OwnerBox.md) — All Categories / Display Boxes
+- [`PageBreakBox`](All Categories/Display Boxes/PageBreakBox.md) — All Categories / Display Boxes
+- [`PanelBox`](All Categories/Display Boxes/PanelBox.md) — All Categories / Display Boxes
+- [`ParallelScaleBox`](All Categories/Display Boxes/ParallelScaleBox.md) — All Categories / Display Boxes
+- [`PictBox`](All Categories/Display Boxes/PictBox.md) — All Categories / Display Boxes
+- [`PictSeg`](All Categories/Display Boxes/PictSeg.md) — All Categories / Display Boxes
+- [`PieSeg`](All Categories/Display Boxes/PieSeg.md) — All Categories / Display Boxes
+- [`PlatformContainerBox`](All Categories/Display Boxes/PlatformContainerBox.md) — All Categories / Display Boxes
+- [`PlotColBox`](All Categories/Display Boxes/PlotColBox.md) — All Categories / Display Boxes
+- [`PolySeg`](All Categories/Display Boxes/PolySeg.md) — All Categories / Display Boxes
+- [`PopupBox`](All Categories/Display Boxes/PopupBox.md) — All Categories / Display Boxes
+- [`Project`](All Categories/Display Boxes/Project.md) — All Categories / Display Boxes
+- [`PropertyEditorBox`](All Categories/Display Boxes/PropertyEditorBox.md) — All Categories / Display Boxes
+- [`RadioBox`](All Categories/Display Boxes/RadioBox.md) — All Categories / Display Boxes
+- [`RangeSeg`](All Categories/Display Boxes/RangeSeg.md) — All Categories / Display Boxes
+- [`RangeSliderBox`](All Categories/Display Boxes/RangeSliderBox.md) — All Categories / Display Boxes
+- [`ScaleBox`](All Categories/Display Boxes/ScaleBox.md) — All Categories / Display Boxes
+- [`SceneBox`](All Categories/Display Boxes/SceneBox.md) — All Categories / Display Boxes
+- [`ScriptableContainerBox`](All Categories/Display Boxes/ScriptableContainerBox.md) — All Categories / Display Boxes
+- [`ScriptBox`](All Categories/Display Boxes/ScriptBox.md) — All Categories / Display Boxes
+- [`ScriptContainerBox`](All Categories/Display Boxes/ScriptContainerBox.md) — All Categories / Display Boxes
+- [`ScrollBox`](All Categories/Display Boxes/ScrollBox.md) — All Categories / Display Boxes
+- [`ShapeBorderBox`](All Categories/Display Boxes/ShapeBorderBox.md) — All Categories / Display Boxes
+- [`ShapeSeg`](All Categories/Display Boxes/ShapeSeg.md) — All Categories / Display Boxes
+- [`SheetBox`](All Categories/Display Boxes/SheetBox.md) — All Categories / Display Boxes
+- [`SheetPanelBox`](All Categories/Display Boxes/SheetPanelBox.md) — All Categories / Display Boxes
+- [`SliderBox`](All Categories/Display Boxes/SliderBox.md) — All Categories / Display Boxes
+- [`SpacerBox`](All Categories/Display Boxes/SpacerBox.md) — All Categories / Display Boxes
+- [`SpinBox`](All Categories/Display Boxes/SpinBox.md) — All Categories / Display Boxes
+- [`SplitterBox`](All Categories/Display Boxes/SplitterBox.md) — All Categories / Display Boxes
+- [`StemLeafBox`](All Categories/Display Boxes/StemLeafBox.md) — All Categories / Display Boxes
+- [`StickyListBox`](All Categories/Display Boxes/StickyListBox.md) — All Categories / Display Boxes
+- [`StringColBox`](All Categories/Display Boxes/StringColBox.md) — All Categories / Display Boxes
+- [`StringColEditBox`](All Categories/Display Boxes/StringColEditBox.md) — All Categories / Display Boxes
+- [`TableBox`](All Categories/Display Boxes/TableBox.md) — All Categories / Display Boxes
+- [`TabListBox`](All Categories/Display Boxes/TabListBox.md) — All Categories / Display Boxes
+- [`TabPageBox`](All Categories/Display Boxes/TabPageBox.md) — All Categories / Display Boxes
+- [`Tabulate Box`](All Categories/Display Boxes/Tabulate Box.md) — All Categories / Display Boxes
+- [`Tabulate Stacked Columns List`](All Categories/Display Boxes/Tabulate Stacked Columns List.md) — All Categories / Display Boxes
+- [`Tabulate Stacked List`](All Categories/Display Boxes/Tabulate Stacked List.md) — All Categories / Display Boxes
+- [`TextBox`](All Categories/Display Boxes/TextBox.md) — All Categories / Display Boxes
+- [`TextEditBox`](All Categories/Display Boxes/TextEditBox.md) — All Categories / Display Boxes
+- [`TextSeg`](All Categories/Display Boxes/TextSeg.md) — All Categories / Display Boxes
+- [`TextTruncatorBox`](All Categories/Display Boxes/TextTruncatorBox.md) — All Categories / Display Boxes
+- [`TreeBox`](All Categories/Display Boxes/TreeBox.md) — All Categories / Display Boxes
+- [`TreeMapBox`](All Categories/Display Boxes/TreeMapBox.md) — All Categories / Display Boxes
+- [`TreeMapSeg`](All Categories/Display Boxes/TreeMapSeg.md) — All Categories / Display Boxes
+- [`UnknownBox`](All Categories/Display Boxes/UnknownBox.md) — All Categories / Display Boxes
+- [`UnlineUpBox`](All Categories/Display Boxes/UnlineUpBox.md) — All Categories / Display Boxes
+- [`WebBrowserBox`](All Categories/Display Boxes/WebBrowserBox.md) — All Categories / Display Boxes
+- [`WordCloudBox`](All Categories/Display Boxes/WordCloudBox.md) — All Categories / Display Boxes
+- [`WrapListBox`](All Categories/Display Boxes/WrapListBox.md) — All Categories / Display Boxes
+- [`All Functions`](All Categories/Functions/All Functions.md) — All Categories / Functions
+- [`Assignment`](All Categories/Functions/Assignment.md) — All Categories / Functions
+- [`CAS`](All Categories/Functions/CAS.md) — All Categories / Functions
+- [`Character`](All Categories/Functions/Character.md) — All Categories / Functions
+- [`Character Pattern`](All Categories/Functions/Character Pattern.md) — All Categories / Functions
+- [`Comparison`](All Categories/Functions/Comparison.md) — All Categories / Functions
+- [`Conditional`](All Categories/Functions/Conditional.md) — All Categories / Functions
+- [`Constant`](All Categories/Functions/Constant.md) — All Categories / Functions
+- [`Date Time`](All Categories/Functions/Date Time.md) — All Categories / Functions
+- [`Discrete Probability`](All Categories/Functions/Discrete Probability.md) — All Categories / Functions
+- [`Display`](All Categories/Functions/Display.md) — All Categories / Functions
+- [`Expression`](All Categories/Functions/Expression.md) — All Categories / Functions
+- [`File`](All Categories/Functions/File.md) — All Categories / Functions
+- [`Finance`](All Categories/Functions/Finance.md) — All Categories / Functions
+- [`Graphics`](All Categories/Functions/Graphics.md) — All Categories / Functions
+- [`JMP Clinical`](All Categories/Functions/JMP Clinical.md) — All Categories / Functions
+- [`JMP Live`](All Categories/Functions/JMP Live.md) — All Categories / Functions
+- [`List`](All Categories/Functions/List.md) — All Categories / Functions
+- [`MATLAB`](All Categories/Functions/MATLAB.md) — All Categories / Functions
+- [`Matrix`](All Categories/Functions/Matrix.md) — All Categories / Functions
+- [`Numeric`](All Categories/Functions/Numeric.md) — All Categories / Functions
+- [`Optimization`](All Categories/Functions/Optimization.md) — All Categories / Functions
+- [`PI Server`](All Categories/Functions/PI Server.md) — All Categories / Functions
+- [`Probability`](All Categories/Functions/Probability.md) — All Categories / Functions
+- [`Programming`](All Categories/Functions/Programming.md) — All Categories / Functions
+- [`Python`](All Categories/Functions/Python.md) — All Categories / Functions
+- [`Random`](All Categories/Functions/Random.md) — All Categories / Functions
+- [`R`](All Categories/Functions/R.md) — All Categories / Functions
+- [`Row`](All Categories/Functions/Row.md) — All Categories / Functions
+- [`Row State`](All Categories/Functions/Row State.md) — All Categories / Functions
+- [`SAS`](All Categories/Functions/SAS.md) — All Categories / Functions
+- [`SQL`](All Categories/Functions/SQL.md) — All Categories / Functions
+- [`Statistical`](All Categories/Functions/Statistical.md) — All Categories / Functions
+- [`Transcendental`](All Categories/Functions/Transcendental.md) — All Categories / Functions
+- [`Trigonometric`](All Categories/Functions/Trigonometric.md) — All Categories / Functions
+- [`Utility`](All Categories/Functions/Utility.md) — All Categories / Functions
+- [`Add-In`](All Categories/Objects/Add-In.md) — All Categories / Objects
+- [`Alpha Shape`](All Categories/Objects/Alpha Shape.md) — All Categories / Objects
+- [`Association Analysis`](All Categories/Objects/Association Analysis.md) — All Categories / Objects
+- [`Associative Array`](All Categories/Objects/Associative Array.md) — All Categories / Objects
+- [`Attribute Chart`](All Categories/Objects/Attribute Chart.md) — All Categories / Objects
+- [`Bayesian Optimization`](All Categories/Objects/Bayesian Optimization.md) — All Categories / Objects
+- [`Boosted Tree`](All Categories/Objects/Boosted Tree.md) — All Categories / Objects
+- [`Bootstrap Forest`](All Categories/Objects/Bootstrap Forest.md) — All Categories / Objects
+- [`Bubble Plot`](All Categories/Objects/Bubble Plot.md) — All Categories / Objects
+- [`Categorical`](All Categories/Objects/Categorical.md) — All Categories / Objects
+- [`Cell Plot`](All Categories/Objects/Cell Plot.md) — All Categories / Objects
+- [`Choice`](All Categories/Objects/Choice.md) — All Categories / Objects
+- [`Class`](All Categories/Objects/Class.md) — All Categories / Objects
+- [`Cluster`](All Categories/Objects/Cluster.md) — All Categories / Objects
+- [`Cluster Variables`](All Categories/Objects/Cluster Variables.md) — All Categories / Objects
+- [`Columns Manager`](All Categories/Objects/Columns Manager.md) — All Categories / Objects
+- [`Column Switcher`](All Categories/Objects/Column Switcher.md) — All Categories / Objects
+- [`Compare Data Tables`](All Categories/Objects/Compare Data Tables.md) — All Categories / Objects
+- [`Constant Stress ALT Design`](All Categories/Objects/Constant Stress ALT Design.md) — All Categories / Objects
+- [`Contour Plot`](All Categories/Objects/Contour Plot.md) — All Categories / Objects
+- [`Contour Profiler`](All Categories/Objects/Contour Profiler.md) — All Categories / Objects
+- [`Control Chart Builder`](All Categories/Objects/Control Chart Builder.md) — All Categories / Objects
+- [`Cumulative Damage`](All Categories/Objects/Cumulative Damage.md) — All Categories / Objects
+- [`Custom Function`](All Categories/Objects/Custom Function.md) — All Categories / Objects
+- [`Custom Graph`](All Categories/Objects/Custom Graph.md) — All Categories / Objects
+- [`Custom Profiler`](All Categories/Objects/Custom Profiler.md) — All Categories / Objects
+- [`CUSUM Control Chart`](All Categories/Objects/CUSUM Control Chart.md) — All Categories / Objects
+- [`Data Connector`](All Categories/Objects/Data Connector.md) — All Categories / Objects
+- [`Data Connector Metadata`](All Categories/Objects/Data Connector Metadata.md) — All Categories / Objects
+- [`Data Connector Registry`](All Categories/Objects/Data Connector Registry.md) — All Categories / Objects
+- [`Datafeed`](All Categories/Objects/Datafeed.md) — All Categories / Objects
+- [`Data Filter`](All Categories/Objects/Data Filter.md) — All Categories / Objects
+- [`Data Table`](All Categories/Objects/Data Table.md) — All Categories / Objects
+- [`Degradation`](All Categories/Objects/Degradation.md) — All Categories / Objects
+- [`Destructive Degradation`](All Categories/Objects/Destructive Degradation.md) — All Categories / Objects
+- [`Diagram`](All Categories/Objects/Diagram.md) — All Categories / Objects
+- [`Discriminant`](All Categories/Objects/Discriminant.md) — All Categories / Objects
+- [`Distance Matrix`](All Categories/Objects/Distance Matrix.md) — All Categories / Objects
+- [`Distribution`](All Categories/Objects/Distribution.md) — All Categories / Objects
+- [`DLLScriptable`](All Categories/Objects/DLLScriptable.md) — All Categories / Objects
+- [`DOE`](All Categories/Objects/DOE.md) — All Categories / Objects
+- [`EMP Measurement Systems Analysis`](All Categories/Objects/EMP Measurement Systems Analysis.md) — All Categories / Objects
+- [`EWMA Control Chart`](All Categories/Objects/EWMA Control Chart.md) — All Categories / Objects
+- [`Excel Profiler`](All Categories/Objects/Excel Profiler.md) — All Categories / Objects
+- [`Explore Missing Values`](All Categories/Objects/Explore Missing Values.md) — All Categories / Objects
+- [`Explore Outliers`](All Categories/Objects/Explore Outliers.md) — All Categories / Objects
+- [`Explore Patterns`](All Categories/Objects/Explore Patterns.md) — All Categories / Objects
+- [`Factor Analysis`](All Categories/Objects/Factor Analysis.md) — All Categories / Objects
+- [`Fatigue Model`](All Categories/Objects/Fatigue Model.md) — All Categories / Objects
+- [`Fit Curve`](All Categories/Objects/Fit Curve.md) — All Categories / Objects
+- [`Fit Definitive Screening`](All Categories/Objects/Fit Definitive Screening.md) — All Categories / Objects
+- [`Fit Group`](All Categories/Objects/Fit Group.md) — All Categories / Objects
+- [`Fit Group Orthogonal Supersaturated`](All Categories/Objects/Fit Group Orthogonal Supersaturated.md) — All Categories / Objects
+- [`Fit Life by X`](All Categories/Objects/Fit Life by X.md) — All Categories / Objects
+- [`Fit Model`](All Categories/Objects/Fit Model.md) — All Categories / Objects
+- [`Fit Two Level Screening`](All Categories/Objects/Fit Two Level Screening.md) — All Categories / Objects
+- [`Fit Y by X Group`](All Categories/Objects/Fit Y by X Group.md) — All Categories / Objects
+- [`Formula Depot`](All Categories/Objects/Formula Depot.md) — All Categories / Objects
+- [`Functional Data Explorer Group`](All Categories/Objects/Functional Data Explorer Group.md) — All Categories / Objects
+- [`Functional Data Explorer`](All Categories/Objects/Functional Data Explorer.md) — All Categories / Objects
+- [`Gaussian Process`](All Categories/Objects/Gaussian Process.md) — All Categories / Objects
+- [`Graph Builder`](All Categories/Objects/Graph Builder.md) — All Categories / Objects
+- [`GridBox`](All Categories/Objects/GridBox.md) — All Categories / Objects
+- [`Group Platform`](All Categories/Objects/Group Platform.md) — All Categories / Objects
+- [`HTTP`](All Categories/Objects/HTTP.md) — All Categories / Objects
+- [`Image`](All Categories/Objects/Image.md) — All Categories / Objects
+- [`IP.21 Server`](All Categories/Objects/IP.21 Server.md) — All Categories / Objects
+- [`Item Analysis`](All Categories/Objects/Item Analysis.md) — All Categories / Objects
+- [`JMP App`](All Categories/Objects/JMP App.md) — All Categories / Objects
+- [`JMP App Module Instance`](All Categories/Objects/JMP App Module Instance.md) — All Categories / Objects
+- [`JMP App Module`](All Categories/Objects/JMP App Module.md) — All Categories / Objects
+- [`JMP Live Connection`](All Categories/Objects/JMP Live Connection.md) — All Categories / Objects
+- [`JMP Live Content`](All Categories/Objects/JMP Live Content.md) — All Categories / Objects
+- [`JMP Live Data`](All Categories/Objects/JMP Live Data.md) — All Categories / Objects
+- [`JMP Live Folder`](All Categories/Objects/JMP Live Folder.md) — All Categories / Objects
+- [`JMP Live Post`](All Categories/Objects/JMP Live Post.md) — All Categories / Objects
+- [`JMP Live Report`](All Categories/Objects/JMP Live Report.md) — All Categories / Objects
+- [`JMP Live Result List`](All Categories/Objects/JMP Live Result List.md) — All Categories / Objects
+- [`JMP Live Result`](All Categories/Objects/JMP Live Result.md) — All Categories / Objects
+- [`JMP Live Space`](All Categories/Objects/JMP Live Space.md) — All Categories / Objects
+- [`K Means Cluster`](All Categories/Objects/K Means Cluster.md) — All Categories / Objects
+- [`K Nearest Neighbors`](All Categories/Objects/K Nearest Neighbors.md) — All Categories / Objects
+- [`Latent Class Analysis`](All Categories/Objects/Latent Class Analysis.md) — All Categories / Objects
+- [`Legend Item`](All Categories/Objects/Legend Item.md) — All Categories / Objects
+- [`Legend Model`](All Categories/Objects/Legend Model.md) — All Categories / Objects
+- [`Life Distribution and Extensions`](All Categories/Objects/Life Distribution and Extensions.md) — All Categories / Objects
+- [`Loading Bar Plot`](All Categories/Objects/Loading Bar Plot.md) — All Categories / Objects
+- [`Make Validation Column`](All Categories/Objects/Make Validation Column.md) — All Categories / Objects
+- [`Manage Limits`](All Categories/Objects/Manage Limits.md) — All Categories / Objects
+- [`Marker Admixture`](All Categories/Objects/Marker Admixture.md) — All Categories / Objects
+- [`Marker Imputation`](All Categories/Objects/Marker Imputation.md) — All Categories / Objects
+- [`Marker Relatedness`](All Categories/Objects/Marker Relatedness.md) — All Categories / Objects
+- [`Marker Simulation`](All Categories/Objects/Marker Simulation.md) — All Categories / Objects
+- [`Marker Statistics`](All Categories/Objects/Marker Statistics.md) — All Categories / Objects
+- [`Matched Pairs`](All Categories/Objects/Matched Pairs.md) — All Categories / Objects
+- [`MATLAB Connection`](All Categories/Objects/MATLAB Connection.md) — All Categories / Objects
+- [`MaxDiff`](All Categories/Objects/MaxDiff.md) — All Categories / Objects
+- [`Mixture Profiler`](All Categories/Objects/Mixture Profiler.md) — All Categories / Objects
+- [`Model Comparison`](All Categories/Objects/Model Comparison.md) — All Categories / Objects
+- [`Model Driven Multivariate Control Chart`](All Categories/Objects/Model Driven Multivariate Control Chart.md) — All Categories / Objects
+- [`Model Screening`](All Categories/Objects/Model Screening.md) — All Categories / Objects
+- [`Multidimensional Scaling`](All Categories/Objects/Multidimensional Scaling.md) — All Categories / Objects
+- [`Multiple Correspondence Analysis`](All Categories/Objects/Multiple Correspondence Analysis.md) — All Categories / Objects
+- [`Multiple Factor Analysis`](All Categories/Objects/Multiple Factor Analysis.md) — All Categories / Objects
+- [`Multiple File Import`](All Categories/Objects/Multiple File Import.md) — All Categories / Objects
+- [`Multivariate Embedding`](All Categories/Objects/Multivariate Embedding.md) — All Categories / Objects
+- [`Multivariate`](All Categories/Objects/Multivariate.md) — All Categories / Objects
+- [`Naive Bayes`](All Categories/Objects/Naive Bayes.md) — All Categories / Objects
+- [`Namespace`](All Categories/Objects/Namespace.md) — All Categories / Objects
+- [`Neural`](All Categories/Objects/Neural.md) — All Categories / Objects
+- [`NodeGraphBox`](All Categories/Objects/NodeGraphBox.md) — All Categories / Objects
+- [`Nonlinear`](All Categories/Objects/Nonlinear.md) — All Categories / Objects
+- [`Normalization`](All Categories/Objects/Normalization.md) — All Categories / Objects
+- [`Normal Mixtures`](All Categories/Objects/Normal Mixtures.md) — All Categories / Objects
+- [`Notebook`](All Categories/Objects/Notebook.md) — All Categories / Objects
+- [`NumberEditableBox`](All Categories/Objects/NumberEditableBox.md) — All Categories / Objects
+- [`Parallel Plot`](All Categories/Objects/Parallel Plot.md) — All Categories / Objects
+- [`Pareto Plot`](All Categories/Objects/Pareto Plot.md) — All Categories / Objects
+- [`Partial Least Squares`](All Categories/Objects/Partial Least Squares.md) — All Categories / Objects
+- [`Partition Platform`](All Categories/Objects/Partition Platform.md) — All Categories / Objects
+- [`PictureBox`](All Categories/Objects/PictureBox.md) — All Categories / Objects
+- [`Predictor Screening`](All Categories/Objects/Predictor Screening.md) — All Categories / Objects
+- [`Preferences`](All Categories/Objects/Preferences.md) — All Categories / Objects
+- [`Principal Components`](All Categories/Objects/Principal Components.md) — All Categories / Objects
+- [`Process Capability`](All Categories/Objects/Process Capability.md) — All Categories / Objects
+- [`Process History Explorer`](All Categories/Objects/Process History Explorer.md) — All Categories / Objects
+- [`Process Screening`](All Categories/Objects/Process Screening.md) — All Categories / Objects
+- [`Profiler`](All Categories/Objects/Profiler.md) — All Categories / Objects
+- [`Python Connection`](All Categories/Objects/Python Connection.md) — All Categories / Objects
+- [`R Connection`](All Categories/Objects/R Connection.md) — All Categories / Objects
+- [`Recurrence Analysis`](All Categories/Objects/Recurrence Analysis.md) — All Categories / Objects
+- [`Reliability Forecast`](All Categories/Objects/Reliability Forecast.md) — All Categories / Objects
+- [`Reliability Growth`](All Categories/Objects/Reliability Growth.md) — All Categories / Objects
+- [`Repeated Measures Degradation`](All Categories/Objects/Repeated Measures Degradation.md) — All Categories / Objects
+- [`Response Screening`](All Categories/Objects/Response Screening.md) — All Categories / Objects
+- [`Run Program`](All Categories/Objects/Run Program.md) — All Categories / Objects
+- [`SAS Cloud Analytic Services (CAS)`](All Categories/Objects/SAS Cloud Analytic Services (CAS).md)) — All Categories / Objects
+- [`SAS Integration`](All Categories/Objects/SAS Integration.md) — All Categories / Objects
+- [`Scatterplot 3D`](All Categories/Objects/Scatterplot 3D.md) — All Categories / Objects
+- [`Scatterplot Matrix`](All Categories/Objects/Scatterplot Matrix.md) — All Categories / Objects
+- [`Scheduler`](All Categories/Objects/Scheduler.md) — All Categories / Objects
+- [`Score Ellipse Coverage`](All Categories/Objects/Score Ellipse Coverage.md) — All Categories / Objects
+- [`Sequencing Variants Toolset`](All Categories/Objects/Sequencing Variants Toolset.md) — All Categories / Objects
+- [`Socket`](All Categories/Objects/Socket.md) — All Categories / Objects
+- [`Structural Equation Models`](All Categories/Objects/Structural Equation Models.md) — All Categories / Objects
+- [`Support Vector Machines`](All Categories/Objects/Support Vector Machines.md) — All Categories / Objects
+- [`Surface Plot`](All Categories/Objects/Surface Plot.md) — All Categories / Objects
+- [`Survival`](All Categories/Objects/Survival.md) — All Categories / Objects
+- [`Tabulate`](All Categories/Objects/Tabulate.md) — All Categories / Objects
+- [`Ternary Plot`](All Categories/Objects/Ternary Plot.md) — All Categories / Objects
+- [`Text Explorer`](All Categories/Objects/Text Explorer.md) — All Categories / Objects
+- [`Time Series Forecast`](All Categories/Objects/Time Series Forecast.md) — All Categories / Objects
+- [`Time Series`](All Categories/Objects/Time Series.md) — All Categories / Objects
+- [`Titled List Box`](All Categories/Objects/Titled List Box.md) — All Categories / Objects
+- [`Torch Deep Learning`](All Categories/Objects/Torch Deep Learning.md) — All Categories / Objects
+- [`Treemap`](All Categories/Objects/Treemap.md) — All Categories / Objects
+- [`Tree Node`](All Categories/Objects/Tree Node.md) — All Categories / Objects
+- [`Triangulation`](All Categories/Objects/Triangulation.md) — All Categories / Objects
+- [`Type 1 Gauge`](All Categories/Objects/Type 1 Gauge.md) — All Categories / Objects
+- [`Uplift`](All Categories/Objects/Uplift.md) — All Categories / Objects
+- [`Variability Chart`](All Categories/Objects/Variability Chart.md) — All Categories / Objects
+- [`WebReport`](All Categories/Objects/WebReport.md) — All Categories / Objects
+- [`Window Object`](All Categories/Objects/Window Object.md) — All Categories / Objects
+- [`Workflow`](All Categories/Objects/Workflow.md) — All Categories / Objects
+- [`XGBoost`](All Categories/Objects/XGBoost.md) — All Categories / Objects
+- [`ZipArchive`](All Categories/Objects/ZipArchive.md) — All Categories / Objects
+- [`Python Integration`](All Categories/Python/Python Integration.md) — All Categories / Python
+- [`Bivariate Analysis`](Examples/Sample Data Examples/Bivariate Analysis.md) — Examples / Sample Data Examples
+- [`Categorical`](Examples/Sample Data Examples/Categorical.md) — Examples / Sample Data Examples
+- [`Clustering`](Examples/Sample Data Examples/Clustering.md) — Examples / Sample Data Examples
+- [`Control Charts`](Examples/Sample Data Examples/Control Charts.md) — Examples / Sample Data Examples
+- [`Dataset Analysis`](Examples/Sample Data Examples/Dataset Analysis.md) — Examples / Sample Data Examples
+- [`Data Table`](Examples/Sample Data Examples/Data Table.md) — Examples / Sample Data Examples
+- [`Data Tables`](Examples/Sample Data Examples/Data Tables.md) — Examples / Sample Data Examples
+- [`Design of Experiments`](Examples/Sample Data Examples/Design of Experiments.md) — Examples / Sample Data Examples
+- [`Dimensionality Reduction`](Examples/Sample Data Examples/Dimensionality Reduction.md) — Examples / Sample Data Examples
+- [`Distribution Analysis`](Examples/Sample Data Examples/Distribution Analysis.md) — Examples / Sample Data Examples
+- [`DOE`](Examples/Sample Data Examples/DOE.md) — Examples / Sample Data Examples
+- [`Fit Model`](Examples/Sample Data Examples/Fit Model.md) — Examples / Sample Data Examples
+- [`Graphical Analysis`](Examples/Sample Data Examples/Graphical Analysis.md) — Examples / Sample Data Examples
+- [`Measurement Analysis`](Examples/Sample Data Examples/Measurement Analysis.md) — Examples / Sample Data Examples
+- [`Mixed Model`](Examples/Sample Data Examples/Mixed Model.md) — Examples / Sample Data Examples
+- [`Model Fitting`](Examples/Sample Data Examples/Model Fitting.md) — Examples / Sample Data Examples
+- [`Multivariate Analysis`](Examples/Sample Data Examples/Multivariate Analysis.md) — Examples / Sample Data Examples
+- [`Neural`](Examples/Sample Data Examples/Neural.md) — Examples / Sample Data Examples
+- [`Other Analysis`](Examples/Sample Data Examples/Other Analysis.md) — Examples / Sample Data Examples
+- [`Regression`](Examples/Sample Data Examples/Regression.md) — Examples / Sample Data Examples
+- [`Statistical Analysis`](Examples/Sample Data Examples/Statistical Analysis.md) — Examples / Sample Data Examples
+- [`Text Analysis`](Examples/Sample Data Examples/Text Analysis.md) — Examples / Sample Data Examples
+- [`Time Series`](Examples/Sample Data Examples/Time Series.md) — Examples / Sample Data Examples
+- [`Visualization`](Examples/Sample Data Examples/Visualization.md) — Examples / Sample Data Examples
+- [`index`](index.md) — 
