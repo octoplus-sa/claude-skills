@@ -95,7 +95,45 @@ done < "${TMP_DIR}/pages.txt"
 
 echo "[convert] ${CONVERTED} converted, ${FAILED} failed"
 
-# 5. Build a flat alphabetical index of every page.
+# 5. Strip the two large embedded sample-script "easter eggs" from MouseBox.md
+#    — a paint program under SetClick and a 15-puzzle under SetDropTrack. They
+#    are described at
+#    https://community.jmp.com/t5/Uncharted/Three-JSL-Easter-Eggs/ba-p/21181
+#    and aren't useful as API reference content. Idempotent: a no-op if the
+#    upstream ever drops them.
+MOUSEBOX_MD="${OUT_DIR}/All Categories/Display Boxes/MouseBox.md"
+if [ -f "${MOUSEBOX_MD}" ]; then
+    echo "[strip] easter-egg sample blocks from MouseBox.md"
+    python3 - "${MOUSEBOX_MD}" <<'PY'
+import pathlib, re, sys
+
+path = pathlib.Path(sys.argv[1])
+text = path.read_text()
+
+def strip_first_fence_after(text, anchor):
+    heading = re.compile(rf'^### \[[^\]]+\]\(#{anchor}\)', re.M)
+    m = heading.search(text)
+    if not m:
+        return text
+    rest = text[m.end():]
+    next_heading = re.search(r'^### \[', rest, re.M)
+    boundary = next_heading.start() if next_heading else len(rest)
+    section, tail = rest[:boundary], rest[boundary:]
+    cleaned = re.sub(r'\n*```[^\n]*\n.*?\n```\n*', '\n\n', section, count=1, flags=re.S)
+    return text[:m.end()] + cleaned + tail
+
+for anchor in ('setclick', 'setdroptrack'):
+    text = strip_first_fence_after(text, anchor)
+
+# Also neutralise the four `Print( 42 )` Hitchhiker gags scattered through
+# trivial `Get*` examples — replace with the no-op expression `1`.
+text = re.sub(r'Print\(\s*42\s*\)', '1', text)
+
+path.write_text(text)
+PY
+fi
+
+# 6. Build a flat alphabetical index of every page.
 INDEX="${OUT_DIR}/index.md"
 {
     echo "# JMP Scripting Index — offline mirror"

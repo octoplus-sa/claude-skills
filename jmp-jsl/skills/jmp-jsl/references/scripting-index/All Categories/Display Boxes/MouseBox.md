@@ -115,7 +115,7 @@ New Window( "MouseBox",
 
 ``` jsl
 mb = MouseBox();
-mb << setClick( Function( {this, clickPt, event}, Print( 42 ) ) );
+mb << setClick( Function( {this, clickPt, event}, 1 ) );
 mb << getClick();
 ```
 
@@ -190,7 +190,7 @@ mb << getDragText;
 
 ``` jsl
 mb = MouseBox();
-mb << setDropCommit( Function( {this, clickPt, text}, Print( 42 ) ) );
+mb << setDropCommit( Function( {this, clickPt, text}, 1 ) );
 mb << getDropCommit();
 ```
 
@@ -214,7 +214,7 @@ mb << getDropEnable();
 
 ``` jsl
 mb = MouseBox();
-mb << setDropTrack( Function( {this, clickPt}, Print( 42 ) ) );
+mb << setDropTrack( Function( {this, clickPt}, 1 ) );
 mb << getDropTrack();
 ```
 
@@ -364,7 +364,7 @@ mb << getTooltip;
 ``` jsl
 mb = MouseBox();
 mb << setTrack(/*track the button-up mouse movement*/Function( {this, clickPt},
-        Print( 42 )
+        1
     )
 );
 mb << getTrack();
@@ -403,81 +403,6 @@ mb << setUserData( [1 2, 3 4] );
 **Syntax:** obj \<\< SetClick( Function( {this, clickpt, event}, \<script\> ) )
 
 **Description:** Supplies a function to handle mouse events when the button is down (or first pressed or released). For button-up, see \<\<SetTrack(). clickpt is an {x,y} position within this MouseBox that was clicked. event is the click event. Values are (in the order in which they happen): "Pressed", "Ticked", or "Released".
-
-``` jsl
-xsize = 300; /* size of the bitmap */
-ysize = 200;
-backred = .8; /* background color is light gray-green */
-backgrn = .9;
-backblu = .8;
-RED = J( ysize, xsize, backred ); /* matrix where the bitmap is composed */
-GRN = J( ysize, xsize, backgrn );
-BLU = J( ysize, xsize, backblu );
-BITMAP = New Image( xsize, ysize ); /* displaybox that holds the bitmap */
-BITMAP << setpixels( "rgb", {RED, GRN, BLU} ); /* initialize bitmap */
-drawline = Function( {x0, y0, x1, y1}, /* utility function to draw a line in an array using matrix operations */
-    {dx = x1 - x0, dy = y1 - y0, adx = Abs( dx ), ady = Abs( dy ), m, b},
-    If( adx > ady,
-        xx = Round( x0 ) :: Round( x1 );
-        m = dy / dx;
-        b = y0 - m * x0;
-        yy = Round( xx * m + b );
-    ,
-        yy = Round( y0 ) :: Round( y1 );
-        m = dx / dy;
-        b = x0 - m * y0;
-        xx = Round( yy * m + b );
-    );
-    singleindex = (yy - 1) * N Col( GRN ) + xx;
-    Try( GRN[singleindex] = .6, 0 ); /* catch indexing errors and ignore the problems */
-    Try( RED[singleindex] = .1, 0 ); /* the line is dark green; you could add other */
-    Try( BLU[singleindex] = .1, 0 ); /* controls to change the color. */
-);
-w = New Window( "paint",
-    MouseBox( /* <<<<<<<< handler for mouse events */
-        BITMAP, /* <<<<<< child box does not receive the mouse events */
-        <<setTrackEnable( 1 ),
-        <<setTrack(
-            Function( {this, clickpt},
-                this << setCursor( "Hand" ) /* button-up tracking - use the hand */
-            )
-        ),
-        <<setClickEnable( 1 ),
-        <<setClick( /* button-down, move, button-release handler */
-            Function( {this, clickpt, event}, /*Is Alt Key(),Is Control Key(),Is Shift Key() should be captured on "Pressed" */
-                If( event == "Released" | event == "Canceled",
-                    this << setCursor( "Hand" ) /* switch back to hand immediately */
-                ,
-                    this << setCursor( "Finger" ) /* change cursor during drawing */
-                );
-                If(
-                    event == "Pressed",
-                        origin = clickpt; /* capture starting point */
-                        Show( event, origin );,
-                    event == "Moved", /* else */
-                        {x0, y0} = origin;
-                        {x1, y1} = clickpt; /* draw to new point */
-                        drawline( x0, y0, x1, y1 );
-                        drawline( x0 + 1, y0, x1 + 1, y1 ); /* make a thick line */
-                        drawline( x0 - 1, y0, x1 - 1, y1 );
-                        drawline( x0, y0 + 1, x1, y1 + 1 );
-                        drawline( x0, y0 - 1, x1, y1 - 1 );
-                        origin = clickpt;
-                        BITMAP << setpixels( "rgb", {RED, GRN, BLU} ); /* apply changes to bitmap */
-                        w << reshow; /* force screen update */
-                ,
-                    event == "Ticked", /* else ... while the button is pressed but not moving, the tick event will let you do something...here we fade the drawing... */
-                        GRN = (49 * GRN + backgrn) / 50;
-                        RED = (49 * RED + backred) / 50;
-                        BLU = (49 * BLU + backblu) / 50;
-                        BITMAP << setpixels( "rgb", {RED, GRN, BLU} );
-                        w << reshow;
-                );
-            )
-        )
-    )
-);
-```
 
 ### [SetClickEnable](#setclickenable)[](#setclickenable "Click to copy url")
 
@@ -701,153 +626,6 @@ mb << setDropEnable( 1 );
 **Syntax:** obj \<\< SetDropTrack( Function( {this, clickpt}, \<script\> ) )
 
 **Description:** Supplies a function to call when a drag-and-drop operation drags across the MouseBox. The supplied function returns 0.0 to prevent the drop or 1.0 to allow the drop. The actual drop won't happen until the button-release, at which point the SetDropCommit function is called to do something with the dropped text, but only if setDropTrack returned 1.0. clickpt is an {x,y} position within the MouseBox where another MouseBox is being dragged. It is {-1, -1} when the drag is not on this MouseBox.
-
-``` jsl
-nextToBlank = Function( {x, y}, /* helper function */
-    If( /* child is border, grandchild is text */
-        (x > 1 & (((puzzle[x - 1][y] << child) << child) << gettext) == " ") | (x < 4 & (((
-        puzzle[x + 1][y] << child) << child) << gettext) == " ") | (y > 1 & (((puzzle[x][y
-        -1] << child) << child) << gettext) == " ") | (y < 4 & (((puzzle[x][y + 1] << child)
-         << child) << gettext) == " ")
-    ,
-        1,
-        0
-    )
-);/* only allow drag begin if next door to empty cell */
-dragBegin = Function( {this, clickPt},
-    {x, y} = this << getUserData;
-    If( nextToBlank( x, y ),
-        ((this << child) << child) << getText/* the message is the textbox content */
-    , /* else */
-        0 /* suppress the drag */
-    );
-);/* function to remove the character from the source cell, but only if the drop was successful */
-dragEnd = Function( {this, clickPt, how}, /* how is copy/move/ignore */
-    destbox = this << getDestBox;
-    If( Is Empty( destBox ),
-        Show( "unknown destination" );
-        0 /* don't know where the dest was, force ignore */
-        ;
-    ,
-        Try(
-            {x, y} = destbox << GetUserData,
-            x = -1;
-            y = -1;
-        ); /* the destbox might not have a list in userdata */
-        If(
-            Try(
-                puzzle[x][y] != destbox,
-                1 /*throw is same as !=*/
-            )
-        , /* x,y might not be valid index */
-            Show( "not dropped in this puzzle" );
-            0 /* not this puzzle instance, force ignore */
-            ;
-        , /* else */
-            If( how == "ignore",
-                Show( "drop not completed" );
-                0 /* the drop was not completed */
-                ;
-            , /* else */
-                ((this << child) << child) << setText( " " )
-            )
-        );
-    );
-    0 /* the return code is ignored */
-    ;
-);/* function to decide if a drop is allowed.  return codes (0,1) are critical. */
-dropTrack = Function( {this, clickPt},
-    sourcebox = this << getSourceBox;
-    If( Is Empty( sourcebox ),
-        Show( "unknown source" );
-        0 /* no drop from unknown source box */
-        ;
-    , /* else */
-        Try(
-            {x, y} = sourcebox << getUserData,
-            x = -1;
-            y = -1;
-        ); /* the sourcebox mightnot have a list in userdata */
-        If(
-            Try(
-                puzzle[x][y] != sourcebox,
-                1 /*throw is same as !=*/
-            )
-        , /* x,y might not be valid index */
-            Show( "not from this puzzle" );
-            0 /* not sourced from this puzzle instance, ignore */
-            ;
-        , /* else */
-            If( ((this << child) << child) << getText != " ",
-                0 /* no drop on occupied cell */
-            , /* else */
-                1 /* allow drop on the blank cell */
-            )
-        );
-    );
-);/* function to implement the drop */
-dropCommit = Function( {this, clickPt, text},
-    ((this << child) << child) << setText( text );
-    1; /* ignored */
-);/* cursor changer for cells that can source a drag */
-track = Function( {this, clickPt},
-    {x, y} = this << getUserData;
-    If( nextToBlank( x, y ),
-        this << setCursor( "Hand" ),
-        this << setCursor( "Arrow" )
-    );
-    1; /* ignored */
-);/* helper function to construct the displaybox tree */
-mb = Function( {letter, x, y},
-    MouseBox(
-        Border Box( Left( 9 ), Right( 9 ), top( 3 ), bottom( 3 ), sides( 15 ),
-            Text Box(
-                letter,
-                <<setFont( "Courier New" ),
-                <<set font size( 15 ),
-                <<set font style( "bold" )
-            )
-        ),
-        <<setUserData( Eval List( {x, y} ) ), /* remember my location.  I don't move, but my content changes. */
-        <<setDragEnable( 1 ),
-        <<setDragBegin( dragBegin ), /* dragFunctions defined below */
-        <<setDragEnd( dragEnd ),
-        <<setDropEnable( 1 ),
-        <<setDropTrack( dropTrack ),
-        <<setDropCommit( dropCommit ),
-        <<setTrackEnable( 1 ),
-        <<setTrack( track )
-    )
-);
-puzzle = Eval List(
-    {Eval List( {mb( "b", 1, 1 ), mb( "u", 1, 2 ), mb( "y", 1, 3 ), mb( " ", 1, 4 )} ),
-    Eval List( {mb( "t", 2, 1 ), mb( "h", 2, 2 ), mb( "i", 2, 3 ), mb( "s", 2, 4 )} ),
-    Eval List( {mb( "w", 3, 1 ), mb( "o", 3, 2 ), mb( "r", 3, 3 ), mb( "d", 3, 4 )} ),
-    Eval List( {mb( "g", 4, 1 ), mb( "a", 4, 2 ), mb( "m", 4, 3 ), mb( "e", 4, 4 )} )}
-);
-New Window( "puzzle",
-    Border Box( Left( 5 ), Right( 5 ), top( 5 ), bottom( 5 ), sides( 15 ),
-        Lineup Box( N Col( 4 ), spacing( 3, 3 ),
-            puzzle[1][1],
-            puzzle[1][2],
-            puzzle[1][3],
-            puzzle[1][4],
-            puzzle[2][1],
-            puzzle[2][2],
-            puzzle[2][3],
-            puzzle[2][4],
-            puzzle[3][1],
-            puzzle[3][2],
-            puzzle[3][3],
-            puzzle[3][4],
-            puzzle[4][1],
-            puzzle[4][2],
-            puzzle[4][3],
-            puzzle[4][4]
-        )
-    )
-);
-```
 
 ### [SetEdit](#setedit)[](#setedit "Click to copy url")
 
